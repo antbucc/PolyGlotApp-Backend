@@ -124,7 +124,7 @@ app.get('/registeredCourses', (req, res) => {
             }
 
             // const person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};
-
+            console.log("here I return the student courses");
             res.send(finalRegistration);
         }
 
