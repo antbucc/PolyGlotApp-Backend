@@ -63,11 +63,48 @@ app.get('/login', (req, res) => {
 });
 
 
+app.get('/nextQuestion', (req, res) => {
+
+    let token = req.body.token;
+    let courseId = "4";
+
+
+    let url = "http://93.104.214.51/dashboard/local/api/?action=nextQuestion&courseid=" +
+        courseId + "&authtoken=" + token;
+
+    request({
+        method: 'GET',
+        uri: url,
+    },
+        function (error, response, body) {
+            console.log(response);
+
+            var success = JSON.parse(response.body).success;
+            if (success) {
+                var question = JSON.parse(response.body).response;
+
+                res.send(question);
+
+            } else {
+                res.send("error");
+            }
+
+
+        })
+
+
+
+
+}
+
+);
+
+
 app.get('/courses', (req, res) => {
 
     let token = req.query.token;
     let url = "http://93.104.214.51/dashboard/local/api/?action=availableCourses&authtoken=" +
-        token
+        token;
     request({
         method: 'GET',
         uri: url,
@@ -176,4 +213,5 @@ app.post('/registerCourse', (req, res) => {
 
 
 });
+
 app.listen(port, () => console.log(`PolyGlot App listening on port ${port}!`));
