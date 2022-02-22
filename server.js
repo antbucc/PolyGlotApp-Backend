@@ -65,19 +65,20 @@ app.get('/login', (req, res) => {
 
 app.get('/nextQuestion', (req, res) => {
 
-    let token = req.body.token;
-    let courseid = req.body.courseid;
+    let token = req.query.token;
+    let courseid = req.query.courseid;
 
 
     let url = "http://93.104.214.51/dashboard/local/api/?action=nextQuestion&courseid=" +
         courseid + "&authtoken=" + token;
+
 
     request({
         method: 'GET',
         uri: url,
     },
         function (error, response, body) {
-            console.log(response);
+            //  console.log(response);
 
             var success = JSON.parse(response.body).success;
             if (success) {
