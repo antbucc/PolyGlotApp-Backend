@@ -66,11 +66,11 @@ app.get('/login', (req, res) => {
 app.get('/nextQuestion', (req, res) => {
 
     let token = req.body.token;
-    let courseId = "4";
+    let courseid = req.body.courseid;
 
 
     let url = "http://93.104.214.51/dashboard/local/api/?action=nextQuestion&courseid=" +
-        courseId + "&authtoken=" + token;
+        courseid + "&authtoken=" + token;
 
     request({
         method: 'GET',
