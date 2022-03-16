@@ -63,6 +63,45 @@ app.get('/login', (req, res) => {
 });
 
 
+
+app.get('/role', (req, res) => {
+
+    let token = req.body.token;
+    let courseId = req.body.courseid;
+
+    let url =
+        "http://93.104.214.51/dashboard/local/api/?action=role&authtoken=" +
+        token + "&courseid=" + courseId;
+    console.log("url: " + url);
+    request({
+        method: 'POST',
+        uri: url,
+    },
+        function (error, response, body) {
+
+            var success = JSON.parse(response.body).success;
+            if (error) {
+                console.log("this is my error:" + error);
+                console.log("this is my response: " + response);
+                res.send("error");
+            }
+            else if (success) {
+                // here I have the user role
+                console.log("Role with success");
+                let currentRole = JSON.parse(response.body).response;
+                var role = currentRole;
+                res.send(currentRole);
+            }
+            else {
+                res.send("no-role");
+            }
+
+
+        })
+
+});
+
+
 app.get('/nextQuestion', (req, res) => {
 
     let token = req.query.token;
@@ -168,6 +207,36 @@ app.get('/registeredCourses', (req, res) => {
 
     });
 
+
+
+});
+
+app.get('/playerStatus', (req, res) => {
+    let playerId = req.body.playerId;
+    let url = process.env.NODE_GE_STATUS + "/" + process.env.NODE_GAME_ID + "/" + playerId;
+    console.log(url);
+    // GAMIFICATION API ALL TO RETRIEVE THE PLAYER STATUS
+
+    var options = {
+        'method': 'GET',
+        'url': url,
+        'headers': {
+            'Authorization': process.env.NODE_GE_AUTH,
+            'Content-Type': 'application/json'
+        }
+
+    };
+
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+        if (error) {
+            res.send("error");
+        }
+        else if (response.statusCode == 200) {
+            res.send(response.body);
+        }
+
+    });
 
 
 });
