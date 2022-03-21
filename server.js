@@ -212,9 +212,9 @@ app.get('/registeredCourses', (req, res) => {
 });
 
 app.get('/playerStatus', (req, res) => {
-    let playerId = req.body.playerId;
+    let playerId = req.query.playerId;
     let url = process.env.NODE_GE_STATUS + "/" + process.env.NODE_GAME_ID + "/" + playerId;
-    console.log(url);
+    //console.log(url);
     // GAMIFICATION API ALL TO RETRIEVE THE PLAYER STATUS
 
     var options = {
