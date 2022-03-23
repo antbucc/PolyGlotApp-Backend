@@ -132,6 +132,39 @@ app.get('/nextQuestion', (req, res) => {
 
         })
 
+}
+
+);
+
+app.get('/questionOptions', (req, res) => {
+
+    let token = req.query.token;
+    let questionid = req.query.courseid;
+
+    let url = "http://93.104.214.51/dashboard/local/api/?action=questionOption&authtoken=" +
+        token + "&questionid=" + questionid;
+
+
+    request({
+        method: 'GET',
+        uri: url,
+    },
+        function (error, response, body) {
+            //  console.log(response);
+
+            var success = JSON.parse(response.body).success;
+            if (success) {
+                var question = JSON.parse(response.body).response;
+
+                res.send(question);
+
+            } else {
+                res.send("error");
+            }
+
+
+        })
+
 
 
 
