@@ -243,6 +243,35 @@ app.get('/registeredCourses', (req, res) => {
 
 });
 
+app.get('/gameStatus', (req, res) => {
+
+    let url = process.env.NODE_GE_STATUS + "/" + process.env.NODE_GAME_ID;
+    var options = {
+        'method': 'GET',
+        'url': url,
+        'headers': {
+            'Authorization': process.env.NODE_GE_AUTH,
+            'Content-Type': 'application/json'
+        }
+
+    };
+
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+        if (error) {
+            res.send("error");
+        }
+        else if (response.statusCode == 200) {
+            res.send(response.body);
+        }
+
+    });
+
+
+});
+
+
+
 app.get('/playerStatus', (req, res) => {
     let playerId = req.query.playerId;
     let url = process.env.NODE_GE_STATUS + "/" + process.env.NODE_GAME_ID + "/" + playerId;
