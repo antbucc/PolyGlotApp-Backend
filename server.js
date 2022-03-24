@@ -111,7 +111,7 @@ app.get('/nextQuestion', (req, res) => {
     let url = "http://93.104.214.51/dashboard/local/api/?action=nextQuestion&courseid=" +
         courseid + "&authtoken=" + token;
 
-
+    console.log(url);
     request({
         method: 'GET',
         uri: url,
@@ -143,6 +143,8 @@ app.get('/questionOptions', (req, res) => {
 
     let url = "http://93.104.214.51/dashboard/local/api/?action=questionOptions&authtoken=" +
         token + "&questionid=" + questionid;
+
+    console.log(url);
 
     request({
         method: 'GET',
