@@ -138,8 +138,8 @@ app.get('/nextQuestion', (req, res) => {
 
 app.get('/questionOptions', (req, res) => {
 
-    let token = req.body.token;
-    let questionid = req.body.questionid;
+    let token = req.query.token;
+    let questionid = req.query.questionid;
 
     let url = "http://93.104.214.51/dashboard/local/api/?action=questionOption&authtoken=" +
         token + "&questionid=" + questionid;
