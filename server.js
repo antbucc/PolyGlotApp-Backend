@@ -141,7 +141,7 @@ app.get('/questionOptions', (req, res) => {
     let token = req.query.token;
     let questionid = req.query.questionid;
 
-    let url = "http://93.104.214.51/dashboard/local/api/?action=questionOption&authtoken=" +
+    let url = "http://93.104.214.51/dashboard/local/api/?action=questionOptions&authtoken=" +
         token + "&questionid=" + questionid;
 
     request({
