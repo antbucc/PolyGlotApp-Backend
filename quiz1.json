@@ -1,0 +1,28 @@
+{
+    "id":10000,
+    "course": 15489,
+    "name": "Ingegneria del Software",
+    "intro": "Nella scorsa lezione si è parlato in particolare di grafi UML",
+    "timeopen": "2022-03-31T06:31:24.061Z",
+    "timeclose": "2022-03-31T06:31:24.061Z",
+    "attemtps": 1,
+    "attemptonlast": 1,
+    "grade": 2,
+    "decimalpoints": 0,
+    "questiondecimalpoints": 0,
+    "reviewattempt": 0,
+    "question": "Quale affermazione descrive al meglio un grafo UML?",
+    "timecreated": "2022-03-31T06:31:24.061Z",
+    "timemodified": "2022-03-31T06:31:24.061Z",
+    "timelimit": "3600000",
+    "browsersecurity": "TOKEN",
+    "answer": {
+      "1": "A",
+      "2": "B",
+      "3": "C",
+      "4": "D",
+      "5": ""
+    },
+    "img_as_answer": "false",
+    "correct_answer": 3
+  }

@@ -10,9 +10,12 @@
   "author": "Antonio Bucchiarone",
   "license": "ISC",
   "dependencies": {
+    "core-js": "^3.21.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "mongodb": "^4.5.0",
+    "stable": "^0.1.8",
     "utils": "^0.3.1"
   }
 }
