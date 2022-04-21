@@ -15,6 +15,7 @@ console.log("mi connetto a "+ url);
 
 insertFromXML('./json_data.json');
 
+getQuest("IngSoft","B3");
 
 /*MongoClient.connect(url, function(err, db) {
   if (err) throw err;
@@ -30,6 +31,10 @@ insertFromXML('./json_data.json');
 });*/
 
 
+/**
+ * 
+ * @param {*} file file JSON con tutte le domande esportate da moodle
+ */
 function insertFromXML(file){
   var quizes = require('./json_data.json');
 
@@ -47,7 +52,12 @@ function insertFromXML(file){
   });
   console.log("END");
 }
-
+/**
+ * 
+ * @param {*} qJson file json originale da moodle
+ * @param {*} subject nome del corso riferito alle domande
+ * @returns file json aggiornato con le nuove voci
+ */
 function addKeysquizes(qJson,subject){
   let tmp=0;
 
@@ -59,4 +69,26 @@ function addKeysquizes(qJson,subject){
 
   });
   return qJson;
+}
+
+/**
+ * 
+ * @param {*} course nome del corso
+ * @param {*} section nome del capitolo
+ */
+function getQuest(c,s){
+  let arrToJs;
+  MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+  
+    var dbo = db.db(config.connection.database);
+    dbo.collection("quiz").find({course:c,section:s}).toArray(function(err, res) {
+      if (err) throw err;
+      //console.log(res);
+      arrToJs=res;
+      //arrToJs = JSON.stringify(res);
+      console.log(arrToJs);
+      db.close();
+    });
+  });
 }
