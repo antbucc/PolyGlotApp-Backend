@@ -409,7 +409,6 @@ app.post('/correctAnswer', (req, res) => {
     };
 
 
-    console.log(options);
 
     request(options, function (error, response) {
         if (error) throw new Error(error);
