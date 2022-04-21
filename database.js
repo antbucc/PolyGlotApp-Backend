@@ -37,7 +37,8 @@ function insertFromXML(file){
     if (err) throw err;
   
     var dbo = db.db(config.connection.database);
-    dbo.collection("quiz").insertMany(quizes.quiz.question, function(err, res) {
+    //dbo.collection("quiz").insertMany(quizes.quiz.question, function(err, res) {
+    dbo.collection("quiz").insertMany(addKeysquizes(quizes.quiz.question,"IngSoft"), function(err, res) {
       if (err) throw err;
   
       console.log("1 document inserted");
@@ -45,4 +46,17 @@ function insertFromXML(file){
     }); 
   });
   console.log("END");
+}
+
+function addKeysquizes(qJson,subject){
+  let tmp=0;
+
+  qJson.forEach(element => {
+    element.timeDataOpen="";
+    element.timeDataClose="";
+    element.course=subject;
+    element.section= "B"+tmp++;
+
+  });
+  return qJson;
 }
