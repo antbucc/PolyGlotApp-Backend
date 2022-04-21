@@ -347,8 +347,39 @@ app.post('/registerCourse', (req, res) => {
 
 });
 
+app.post('/noAnswer', (req, res) => {
+    let playerId = req.body.playerId;
+
+    let urlGE = process.env.NODE_GE_EXECUTION;
+
+    var options = {
+        'method': 'POST',
+        'url': urlGE,
+        'headers': {
+            'Authorization': process.env.NODE_GE_AUTH,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "gameId": process.env.NODE_GAME_ID,
+            "playerId": playerId,
+            "actionId": "noAnswer"
+        })
+
+    };
 
 
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+        if (error) {
+            res.send("error");
+        }
+        else if (response.statusCode == 200) {
+            console.log("xp not updated for noAnswer - OK");
+            res.send("OK");
+        }
+
+    });
+});
 app.post('/correctAnswer', (req, res) => {
 
     let playerId = req.body.playerId;
