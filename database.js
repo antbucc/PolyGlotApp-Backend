@@ -11,12 +11,12 @@ var row1= require('./quiz1.json');
 // Connection URL
 //var url="mongodb://localhost:27017/db_quiz";
 var url="mongodb://"+config.connection.host+":"+config.port+"/"+config.connection.database;
-
-
 console.log("mi connetto a "+ url);
 
+insertFromXML('./json_data.json');
 
-MongoClient.connect(url, function(err, db) {
+
+/*MongoClient.connect(url, function(err, db) {
   if (err) throw err;
   console.log("connesso");
 
@@ -26,6 +26,23 @@ MongoClient.connect(url, function(err, db) {
 
     console.log("1 document inserted");
     db.close();
-  });
+  }); 
+});*/
+
+
+function insertFromXML(file){
+  var quizes = require('./json_data.json');
+
+  MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
   
-});
+    var dbo = db.db(config.connection.database);
+    dbo.collection("quiz").insertMany(quizes.quiz.question, function(err, res) {
+      if (err) throw err;
+  
+      console.log("1 document inserted");
+      db.close();
+    }); 
+  });
+  console.log("END");
+}
