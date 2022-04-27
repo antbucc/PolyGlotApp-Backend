@@ -66,8 +66,8 @@ app.get('/login', (req, res) => {
 
 app.get('/role', (req, res) => {
 
-    let token = req.body.token;
-    let courseId = req.body.courseid;
+    let token = req.query.token;
+    let courseId = req.query.courseid;
 
     let url =
         "http://93.104.214.51/dashboard/local/api/?action=role&authtoken=" +
