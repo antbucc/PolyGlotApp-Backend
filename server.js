@@ -66,8 +66,8 @@ app.get('/login', (req, res) => {
 
 app.get('/role', (req, res) => {
 
-    let token = req.body.token;
-    let courseId = req.body.courseid;
+    let token = req.query.token;
+    let courseId = req.query.courseid;
 
     let url =
         "http://93.104.214.51/dashboard/local/api/?action=role&authtoken=" +
@@ -347,4 +347,123 @@ app.post('/registerCourse', (req, res) => {
 
 });
 
+app.post('/noAnswer', (req, res) => {
+    let playerId = req.body.playerId;
+
+    let urlGE = process.env.NODE_GE_EXECUTION;
+
+    var options = {
+        'method': 'POST',
+        'url': urlGE,
+        'headers': {
+            'Authorization': process.env.NODE_GE_AUTH,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "gameId": process.env.NODE_GAME_ID,
+            "playerId": playerId,
+            "actionId": "noAnswer"
+        })
+
+    };
+
+
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+        if (error) {
+            res.send("error");
+        }
+        else if (response.statusCode == 200) {
+            console.log("xp not updated for noAnswer - OK");
+            res.send("OK");
+        }
+
+    });
+});
+app.post('/correctAnswer', (req, res) => {
+
+    let playerId = req.body.playerId;
+    let difficulty = req.body.quiz.difficulty;
+    let time = req.body.quiz.time;
+
+    let urlGE = process.env.NODE_GE_EXECUTION;
+
+
+    var options = {
+        'method': 'POST',
+        'url': urlGE,
+        'headers': {
+            'Authorization': process.env.NODE_GE_AUTH,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "gameId": process.env.NODE_GAME_ID,
+            "playerId": playerId,
+            "actionId": "correctAnswer",
+            "data": {
+                "difficulty": difficulty,
+                "time": time
+            }
+        })
+
+    };
+
+
+
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+        if (error) {
+            res.send("error");
+        }
+        else if (response.statusCode == 200) {
+            console.log("xp added at the player for correct answer - OK");
+            res.send("OK");
+        }
+
+    });
+
+
+});
+
+
+app.post('/wrongAnswer', (req, res) => {
+
+    let playerId = req.body.playerId;
+    let difficulty = req.body.quiz.difficulty;
+
+    let urlGE = process.env.NODE_GE_EXECUTION;
+
+    var options = {
+        'method': 'POST',
+        'url': urlGE,
+        'headers': {
+            'Authorization': process.env.NODE_GE_AUTH,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "gameId": process.env.NODE_GAME_ID,
+            "playerId": playerId,
+            "actionId": "correctAnswer",
+            "data": {
+                "difficulty": difficulty
+            }
+        })
+
+    };
+
+
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+        if (error) {
+            res.send("error");
+        }
+        else if (response.statusCode == 200) {
+            console.log("xp reduced for a wrong answer  - OK");
+            res.send("OK");
+        }
+
+    });
+
+
+});
 app.listen(port, () => console.log(`PolyGlot App listening on port ${port}!`));
