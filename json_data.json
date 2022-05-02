@@ -1,0 +1,95 @@
+{
+  "quiz": {
+    "question": [
+      {
+        "@type": "category",
+        "category": {
+          "text": "$module$/top/Default for Nuovo Quiz"
+        },
+        "info": {
+          "@format": "moodle_auto_format",
+          "text": "The default category for questions shared in context 'Nuovo Quiz'."
+        },
+        "idnumber": null
+      },
+      {
+        "@type": "multichoice",
+        "name": {
+          "text": "Prova Nuovo Quiz"
+        },
+        "questiontext": {
+          "@format": "html",
+          "text": "<p dir=\"ltr\" style=\"text-align: left;\">Contenuto nuovo quiz di prova</p>"
+        },
+        "generalfeedback": {
+          "@format": "html",
+          "text": "<p dir=\"ltr\" style=\"text-align: left;\">esempio di feedbackj</p>"
+        },
+        "correctfeedback": {
+          "@format": "html",
+          "text": "Your answer is correct."
+        },
+        "partiallycorrectfeedback": {
+          "@format": "html",
+          "text": "Your answer is partially correct."
+        },
+        "incorrectfeedback": {
+          "@format": "html",
+          "text": "Your answer is incorrect."
+        },
+        "shownumcorrect": null,
+        "answer": [
+          {
+            "@fraction": "100",
+            "@format": "html",
+            "text": "<p dir=\"ltr\" style=\"text-align: left;\">prima risposta esatta</p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "0",
+            "@format": "html",
+            "text": "<p dir=\"ltr\" style=\"text-align: left;\">seconda risposta sbagliata</p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "0",
+            "@format": "html",
+            "text": "<p dir=\"ltr\" style=\"text-align: left;\">terza risposta sbagliata</p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "0",
+            "@format": "html",
+            "text": "<p dir=\"ltr\" style=\"text-align: left;\">quarta risposta sbagliata</p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          }
+        ],
+        "tags": {
+          "tag": [
+            {
+              "text": "Difficulty-1"
+            },
+            {
+              "text": "Topic-ClassDiagram"
+            },
+            {
+              "text": "Corso-SE"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

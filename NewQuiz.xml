@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<quiz>
+<!-- question: 0  -->
+  <question type="category">
+    <category>
+      <text>$module$/top/Default for Nuovo Quiz</text>
+    </category>
+    <info format="moodle_auto_format">
+      <text>The default category for questions shared in context 'Nuovo Quiz'.</text>
+    </info>
+    <idnumber></idnumber>
+  </question>
+
+<!-- question: 11  -->
+  <question type="multichoice">
+    <name>
+      <text>Prova Nuovo Quiz</text>
+    </name>
+    <questiontext format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">Contenuto nuovo quiz di prova</p>]]></text>
+    </questiontext>
+    <generalfeedback format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">esempio di feedbackj</p>]]></text>
+    </generalfeedback>
+    
+    <correctfeedback format="html">
+      <text>Your answer is correct.</text>
+    </correctfeedback>
+    <partiallycorrectfeedback format="html">
+      <text>Your answer is partially correct.</text>
+    </partiallycorrectfeedback>
+    <incorrectfeedback format="html">
+      <text>Your answer is incorrect.</text>
+    </incorrectfeedback>
+    <shownumcorrect/>
+    <answer fraction="100" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">prima risposta esatta</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">seconda risposta sbagliata</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">terza risposta sbagliata</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <answer fraction="0" format="html">
+      <text><![CDATA[<p dir="ltr" style="text-align: left;">quarta risposta sbagliata</p>]]></text>
+      <feedback format="html">
+        <text></text>
+      </feedback>
+    </answer>
+    <tags>
+      <tag><text>Difficulty-1</text>
+</tag>
+      <tag><text>Topic-ClassDiagram</text>
+</tag>
+      <tag><text>Corso-SE</text>
+</tag>
+    </tags>
+  </question>
+
+</quiz>
