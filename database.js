@@ -4,8 +4,7 @@ var cor_st= require('core-js/stable');
 var MongoClient = require('mongodb').MongoClient;
 var config = require('./local_config.js');
 
-//riga di esempio
-var row1= require('./quiz1.json');
+
 
 
 // Connection URL
@@ -13,17 +12,36 @@ var row1= require('./quiz1.json');
 var url="mongodb://"+config.connection.host+":"+config.port+"/"+config.connection.database;
 console.log("mi connetto a "+ url);
 
-insertFromXML('./json_data.json');
+autoConvertXML();
+//insertFromXML('./json_data.json');
 
-//getQuest("IngSoft","B3");
+getQuest("Corso-SE","Topic-ClassDiagram");
 
+
+
+/**
+ * Auto convert file using python (XML->JSON)
+ */
+function autoConvertXML(){
+  //RUN SCRIPT PYTHON WITH BASH FILE
+  var exec = require('child_process').exec;
+
+  exec('python3 XMLConvert.py',
+    function (error, stdout, stderr) {
+        //console.log('stdout: ' + stdout);
+        //console.log('stderr: ' + stderr);
+        if (error !== null) {
+            console.log('exec error: ' + error);
+        }
+    });
+}
 
 /**
  * 
  * @param {*} file file JSON con tutte le domande esportate da moodle
  */
 function insertFromXML(file){
-  var quizes = require('./json_data.json');
+  var quizes = require(file);
 
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
@@ -91,6 +109,8 @@ function createNewJSON(qJson){
         q.answer[counter]=a;
         counter++;
       });
+      //console.log(q);
+      //console.log("--------------------------------------------------------------");
       newJson[i]=q;
       i++;
     }
@@ -100,42 +120,22 @@ function createNewJSON(qJson){
 
 
 /**
- * 
- * @param {*} qJson file json originale da moodle
- * @param {*} subject nome del corso riferito alle domande
- * @returns file json aggiornato con le nuove voci
- */
-function addKeysquizes(qJson,subject){
-  let tmp=0;
-
-  qJson.forEach(element => {
-    element.timeDataOpen="";
-    element.timeDataClose="";
-    element.course=subject;
-    element.section= "B"+tmp++;
-
-  });
-  return qJson;
-}
-
-/**
- * 
+ * Ricerca random domanda
  * @param {*} course nome del corso
  * @param {*} section nome del capitolo
  */
-function getQuest(c,s){
-  let arrToJs;
+function getQuest(c,t){
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
   
     var dbo = db.db(config.connection.database);
-    dbo.collection("quiz").find({course:c,section:s}).toArray(function(err, res) {
+    ///dbo.collection("quiz").find({course:c,topic:t}).toArray(function(err, res) {
+      dbo.collection("quiz").aggregate([{ $match: { course:c,topic:t} },{ $sample: { size: 1 } }  ]).toArray(function(err, res) {
       if (err) throw err;
-      //console.log(res);
-      arrToJs=res;
-      //arrToJs = JSON.stringify(res);
-      console.log(arrToJs);
+      console.log(res);
       db.close();
     });
+
+
   });
 }
