@@ -12,7 +12,7 @@ var config = require('./local_config.js');
 var url="mongodb://"+config.connection.host+":"+config.port+"/"+config.connection.database;
 console.log("mi connetto a "+ url);
 
-autoConvertXML();
+//autoConvertXML();
 //insertFromXML('./json_data.json');
 
 getQuest("Corso-SE","Topic-ClassDiagram");
