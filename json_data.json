@@ -4,27 +4,35 @@
       {
         "@type": "category",
         "category": {
-          "text": "$module$/top/Default for Nuovo Quiz"
+          "text": "$module$/top/Default for Quiz on Sofware Engineering"
         },
         "info": {
           "@format": "moodle_auto_format",
-          "text": "The default category for questions shared in context 'Nuovo Quiz'."
+          "text": "The default category for questions shared in context 'Quiz on Sofware Engineering'."
         },
         "idnumber": null
       },
       {
         "@type": "multichoice",
         "name": {
-          "text": "Prova Nuovo Quiz"
+          "text": "CD1"
         },
         "questiontext": {
           "@format": "html",
-          "text": "<p dir=\"ltr\" style=\"text-align: left;\">Contenuto nuovo quiz di prova</p>"
+          "text": "<p dir=\"ltr\" style=\"text-align: left;\"></p><p>To define the\ncardinalities of ternary associations ...</p><br><p></p>"
         },
         "generalfeedback": {
           "@format": "html",
-          "text": "<p dir=\"ltr\" style=\"text-align: left;\">esempio di feedbackj</p>"
+          "text": null
         },
+        "defaultgrade": "1.0000000",
+        "penalty": "0.3333333",
+        "hidden": "0",
+        "idnumber": "1",
+        "single": "true",
+        "shuffleanswers": "true",
+        "answernumbering": "ABCD",
+        "showstandardinstruction": "0",
         "correctfeedback": {
           "@format": "html",
           "text": "Your answer is correct."
@@ -40,9 +48,18 @@
         "shownumcorrect": null,
         "answer": [
           {
+            "@fraction": "0",
+            "@format": "html",
+            "text": "<p>... you can proceed\nas if it was a binary association, determining the cardinalities in pairs.</p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
             "@fraction": "100",
             "@format": "html",
-            "text": "<p dir=\"ltr\" style=\"text-align: left;\">prima risposta esatta</p>",
+            "text": "<p dir=\"ltr\" style=\"text-align: left;\">... you have to set\nthe cardinality of two classes to one and determine the cardinality of the\nthird class.<br></p>",
             "feedback": {
               "@format": "html",
               "text": null
@@ -51,7 +68,7 @@
           {
             "@fraction": "0",
             "@format": "html",
-            "text": "<p dir=\"ltr\" style=\"text-align: left;\">seconda risposta sbagliata</p>",
+            "text": "... you have to set the cardinality of one class to one and determine the cardinality of the other two classes.",
             "feedback": {
               "@format": "html",
               "text": null
@@ -60,16 +77,7 @@
           {
             "@fraction": "0",
             "@format": "html",
-            "text": "<p dir=\"ltr\" style=\"text-align: left;\">terza risposta sbagliata</p>",
-            "feedback": {
-              "@format": "html",
-              "text": null
-            }
-          },
-          {
-            "@fraction": "0",
-            "@format": "html",
-            "text": "<p dir=\"ltr\" style=\"text-align: left;\">quarta risposta sbagliata</p>",
+            "text": "<p>... you look at\neach of the classes separately.</p>",
             "feedback": {
               "@format": "html",
               "text": null
@@ -79,10 +87,603 @@
         "tags": {
           "tag": [
             {
+              "text": "topic-association"
+            },
+            {
               "text": "Difficulty-1"
             },
             {
-              "text": "Topic-ClassDiagram"
+              "text": "Corso-SE"
+            }
+          ]
+        }
+      },
+      {
+        "@type": "multichoice",
+        "name": {
+          "text": "CD2"
+        },
+        "questiontext": {
+          "@format": "html",
+          "text": "<p>Which of the\nfollowing statements are true</p>"
+        },
+        "generalfeedback": {
+          "@format": "html",
+          "text": null
+        },
+        "defaultgrade": "1.0000000",
+        "penalty": "0.3333333",
+        "hidden": "0",
+        "idnumber": "2",
+        "single": "false",
+        "shuffleanswers": "true",
+        "answernumbering": "ABCD",
+        "showstandardinstruction": "0",
+        "correctfeedback": {
+          "@format": "html",
+          "text": "Your answer is correct."
+        },
+        "partiallycorrectfeedback": {
+          "@format": "html",
+          "text": "Your answer is partially correct."
+        },
+        "incorrectfeedback": {
+          "@format": "html",
+          "text": "Your answer is incorrect."
+        },
+        "shownumcorrect": null,
+        "answer": [
+          {
+            "@fraction": "0",
+            "@format": "html",
+            "text": "<p>A role name is noted\nin the upper left corner of a class symbol.</p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "0",
+            "@format": "html",
+            "text": "<p>A class must never\nhave a relationship with itself.</p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "50",
+            "@format": "html",
+            "text": "If an object can only\nhave one out of several associations, this may be modeled with a&nbsp;<tt>{xor}</tt>&nbsp;relationship",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "50",
+            "@format": "html",
+            "text": "<p>You can specify the\nnames of the roles the classes play in the relationship on the association\nends</p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          }
+        ],
+        "tags": {
+          "tag": [
+            {
+              "text": "topic-class"
+            },
+            {
+              "text": "Difficulty-2"
+            },
+            {
+              "text": "Corso-SE"
+            }
+          ]
+        }
+      },
+      {
+        "@type": "multichoice",
+        "name": {
+          "text": "CD3"
+        },
+        "questiontext": {
+          "@format": "html",
+          "text": "<p>Enumerations ...</p>"
+        },
+        "generalfeedback": {
+          "@format": "html",
+          "text": null
+        },
+        "defaultgrade": "1.0000000",
+        "penalty": "0.3333333",
+        "hidden": "0",
+        "idnumber": "3",
+        "single": "false",
+        "shuffleanswers": "true",
+        "answernumbering": "ABCD",
+        "showstandardinstruction": "0",
+        "correctfeedback": {
+          "@format": "html",
+          "text": "Your answer is correct."
+        },
+        "partiallycorrectfeedback": {
+          "@format": "html",
+          "text": "Your answer is partially correct."
+        },
+        "incorrectfeedback": {
+          "@format": "html",
+          "text": "Your answer is incorrect."
+        },
+        "shownumcorrect": null,
+        "answer": [
+          {
+            "@fraction": "33.33333",
+            "@format": "html",
+            "text": "... are a\nuser-definable data type which instances form a list of named literal values",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "33.33333",
+            "@format": "html",
+            "text": "<p dir=\"ltr\" style=\"text-align: left;\">... may have\noperations<br></p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "33.33333",
+            "@format": "html",
+            "text": "... have the\nkeyword&nbsp;<tt>&lt;&lt;enumeration&gt;&gt;</tt>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          }
+        ],
+        "tags": {
+          "tag": [
+            {
+              "text": "difficulty-3"
+            },
+            {
+              "text": "topic-enumeration"
+            },
+            {
+              "text": "Corso-SE"
+            }
+          ]
+        }
+      },
+      {
+        "@type": "multichoice",
+        "name": {
+          "text": "CD4"
+        },
+        "questiontext": {
+          "@format": "html",
+          "text": "<p>Association classes\nare used to ...</p>"
+        },
+        "generalfeedback": {
+          "@format": "html",
+          "text": null
+        },
+        "defaultgrade": "1.0000000",
+        "penalty": "0.3333333",
+        "hidden": "0",
+        "idnumber": "4",
+        "single": "false",
+        "shuffleanswers": "true",
+        "answernumbering": "ABCD",
+        "showstandardinstruction": "0",
+        "correctfeedback": {
+          "@format": "html",
+          "text": "Your answer is correct."
+        },
+        "partiallycorrectfeedback": {
+          "@format": "html",
+          "text": "Your answer is partially correct."
+        },
+        "incorrectfeedback": {
+          "@format": "html",
+          "text": "Your answer is incorrect."
+        },
+        "shownumcorrect": null,
+        "answer": [
+          {
+            "@fraction": "0",
+            "@format": "html",
+            "text": "<p>... reduce the\ncardinality of associations.</p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "50",
+            "@format": "html",
+            "text": "... further specify\nassociations.",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "50",
+            "@format": "html",
+            "text": "... model that the\nexistence of one object depends on the existence of the association between two\nother objects.",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          }
+        ],
+        "tags": {
+          "tag": [
+            {
+              "text": "topic-association"
+            },
+            {
+              "text": "Difficulty-2"
+            },
+            {
+              "text": "Corso-SE"
+            }
+          ]
+        }
+      },
+      {
+        "@type": "multichoice",
+        "name": {
+          "text": "CD5"
+        },
+        "questiontext": {
+          "@format": "html",
+          "text": "<p>Which of the following\nstatements about compositions (composite aggregations) are true?</p>"
+        },
+        "generalfeedback": {
+          "@format": "html",
+          "text": null
+        },
+        "defaultgrade": "1.0000000",
+        "penalty": "0.3333333",
+        "hidden": "0",
+        "idnumber": "5",
+        "single": "false",
+        "shuffleanswers": "true",
+        "answernumbering": "ABCD",
+        "showstandardinstruction": "0",
+        "correctfeedback": {
+          "@format": "html",
+          "text": "Your answer is correct."
+        },
+        "partiallycorrectfeedback": {
+          "@format": "html",
+          "text": "Your answer is partially correct."
+        },
+        "incorrectfeedback": {
+          "@format": "html",
+          "text": "Your answer is incorrect."
+        },
+        "shownumcorrect": null,
+        "answer": [
+          {
+            "@fraction": "33.33333",
+            "@format": "html",
+            "text": "The composite\naggregation is a transitive relationship",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "0",
+            "@format": "html",
+            "text": "The multiplicity of a\ncomposite aggregation may be \u22651",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "33.33333",
+            "@format": "html",
+            "text": "In a composition, a\npart may belong to only one composite at a time",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "33.33333",
+            "@format": "html",
+            "text": "<p dir=\"ltr\" style=\"text-align: left;\">When the composite\nelement is deleted, the parts also die<br></p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          }
+        ],
+        "tags": {
+          "tag": [
+            {
+              "text": "difficulty-4"
+            },
+            {
+              "text": "topic-composition"
+            },
+            {
+              "text": "Corso-SE"
+            }
+          ]
+        }
+      },
+      {
+        "@type": "multichoice",
+        "name": {
+          "text": "CD6"
+        },
+        "questiontext": {
+          "@format": "html",
+          "text": "<p>A generalization\nrelationship between a subclass and a superclass has the following properties:</p>"
+        },
+        "generalfeedback": {
+          "@format": "html",
+          "text": null
+        },
+        "defaultgrade": "1.0000000",
+        "penalty": "0.3333333",
+        "hidden": "0",
+        "idnumber": "6",
+        "single": "true",
+        "shuffleanswers": "true",
+        "answernumbering": "ABCD",
+        "showstandardinstruction": "0",
+        "correctfeedback": {
+          "@format": "html",
+          "text": "Your answer is correct."
+        },
+        "partiallycorrectfeedback": {
+          "@format": "html",
+          "text": "Your answer is partially correct."
+        },
+        "incorrectfeedback": {
+          "@format": "html",
+          "text": "Your answer is incorrect."
+        },
+        "shownumcorrect": null,
+        "answer": [
+          {
+            "@fraction": "0",
+            "@format": "html",
+            "text": "<p>The subclass must\nnot have more attributes than the superclass.</p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "0",
+            "@format": "html",
+            "text": "<p>A superclass must\nnot be abstract.</p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "0",
+            "@format": "html",
+            "text": "<p>A subclass can only\ninherit from one superclass.</p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "100",
+            "@format": "html",
+            "text": "The subclass inherits\nthe properties of the superclass",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          }
+        ],
+        "tags": {
+          "tag": [
+            {
+              "text": "topic-class"
+            },
+            {
+              "text": "Difficulty-1"
+            },
+            {
+              "text": "Corso-SE"
+            }
+          ]
+        }
+      },
+      {
+        "@type": "multichoice",
+        "name": {
+          "text": "CD7"
+        },
+        "questiontext": {
+          "@format": "html",
+          "text": "<p>A composition\n(composite aggregation) may express that ...</p>\n\n<p>&nbsp;</p><br><p></p>"
+        },
+        "generalfeedback": {
+          "@format": "html",
+          "text": null
+        },
+        "defaultgrade": "1.0000000",
+        "penalty": "0.3333333",
+        "hidden": "0",
+        "idnumber": "7",
+        "single": "false",
+        "shuffleanswers": "true",
+        "answernumbering": "ABCD",
+        "showstandardinstruction": "0",
+        "correctfeedback": {
+          "@format": "html",
+          "text": "Your answer is correct."
+        },
+        "partiallycorrectfeedback": {
+          "@format": "html",
+          "text": "Your answer is partially correct."
+        },
+        "incorrectfeedback": {
+          "@format": "html",
+          "text": "Your answer is incorrect."
+        },
+        "shownumcorrect": null,
+        "answer": [
+          {
+            "@fraction": "33.33333",
+            "@format": "html",
+            "text": "<p dir=\"ltr\" style=\"text-align: left;\">... the brain is part of the human but not the other way round (asymmetry).<br></p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "33.33333",
+            "@format": "html",
+            "text": "<p dir=\"ltr\" style=\"text-align: left;\">... a building part can consist of other building parts but not of itself (no cycles)<br></p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "33.33333",
+            "@format": "html",
+            "text": "<p dir=\"ltr\" style=\"text-align: left;\">... when a customer is deleted from a database, all his orders are deleted as well (dependency)<br></p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          }
+        ],
+        "tags": {
+          "tag": [
+            {
+              "text": "difficulty-4"
+            },
+            {
+              "text": "topic-composition"
+            },
+            {
+              "text": "Corso-SE"
+            }
+          ]
+        }
+      },
+      {
+        "@type": "multichoice",
+        "name": {
+          "text": "CD8"
+        },
+        "questiontext": {
+          "@format": "html",
+          "text": "<p dir=\"ltr\" style=\"text-align: left;\"></p><p>Which visibilities\ncan attributes and operations of classes have?</p>\n\n<p><br></p><br><p></p>"
+        },
+        "generalfeedback": {
+          "@format": "html",
+          "text": null
+        },
+        "defaultgrade": "1.0000000",
+        "penalty": "0.3333333",
+        "hidden": "0",
+        "idnumber": "8",
+        "single": "false",
+        "shuffleanswers": "true",
+        "answernumbering": "ABCD",
+        "showstandardinstruction": "0",
+        "correctfeedback": {
+          "@format": "html",
+          "text": "Your answer is correct."
+        },
+        "partiallycorrectfeedback": {
+          "@format": "html",
+          "text": "Your answer is partially correct."
+        },
+        "incorrectfeedback": {
+          "@format": "html",
+          "text": "Your answer is incorrect."
+        },
+        "shownumcorrect": null,
+        "answer": [
+          {
+            "@fraction": "25",
+            "@format": "html",
+            "text": "<p dir=\"ltr\" style=\"text-align: left;\">Public<br></p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "0",
+            "@format": "html",
+            "text": "<p dir=\"ltr\" style=\"text-align: left;\">All</p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "25",
+            "@format": "html",
+            "text": "<p dir=\"ltr\" style=\"text-align: left;\">package<br></p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "25",
+            "@format": "html",
+            "text": "<p dir=\"ltr\" style=\"text-align: left;\">protected<br></p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "25",
+            "@format": "html",
+            "text": "<p dir=\"ltr\" style=\"text-align: left;\">private<br></p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          },
+          {
+            "@fraction": "0",
+            "@format": "html",
+            "text": "<p dir=\"ltr\" style=\"text-align: left;\">friends</p>",
+            "feedback": {
+              "@format": "html",
+              "text": null
+            }
+          }
+        ],
+        "tags": {
+          "tag": [
+            {
+              "text": "topic-class"
+            },
+            {
+              "text": "difficulty-5"
             },
             {
               "text": "Corso-SE"

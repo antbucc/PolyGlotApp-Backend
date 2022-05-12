@@ -2,7 +2,7 @@ import os
 import xmltodict
 import xml.etree.ElementTree as et
 import json
-xml_doc_path = os.path.abspath(r"./NewQuiz.xml")
+xml_doc_path = os.path.abspath(r"./Questions.xml")
 
 xml_tree = et.parse(xml_doc_path)
 

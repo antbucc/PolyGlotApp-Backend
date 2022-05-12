@@ -12,10 +12,10 @@ var config = require('./local_config.js');
 var url="mongodb://"+config.connection.host+":"+config.port+"/"+config.connection.database;
 console.log("mi connetto a "+ url);
 
-//autoConvertXML();
-//insertFromXML('./json_data.json');
+autoConvertXML();
+insertFromXML('./json_data.json');
 
-getQuest("Corso-SE","Topic-ClassDiagram");
+//getQuest("Corso-SE","Topic-ClassDiagram");
 
 
 
@@ -42,14 +42,16 @@ function autoConvertXML(){
  */
 function insertFromXML(file){
   var quizes = require(file);
+      let arrTmp=createNewJSON(quizes.quiz.question);
+    console.log(arrTmp);
 
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
   
     var dbo = db.db(config.connection.database);
     //to do...check if exist
-    //console.log(dbo.collection("quiz").find(quizes.quiz.question[1].questiontext.text));
-    dbo.collection("quiz").insertMany(createNewJSON(quizes.quiz.question), function(err, res) {
+
+    dbo.collection("quiz").insertMany(arrTmp, function(err, res) {
       if (err) throw err;
   
       console.log("query executed");
@@ -68,6 +70,7 @@ function createNewJSON(qJson){
   let newJson=[];
   let i=0;
   let q={
+      "idnumber":"",
       "type": "",
       "name": "",
       "questiontext":"",
@@ -84,6 +87,7 @@ function createNewJSON(qJson){
     let tmp= JSON.stringify(question).replace('@', '');
     question= JSON.parse(tmp);
     if(question.type!="category"){
+      q.idnumber=question.idnumber;
       q.type=question.type;
       q.name= question.name.text
       q.questiontext=question.questiontext.text;
