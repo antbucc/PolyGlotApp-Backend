@@ -72,7 +72,6 @@ app.get('/role', (req, res) => {
     let url =
         "http://93.104.214.51/dashboard/local/api/?action=role&authtoken=" +
         token + "&courseid=" + courseId;
-    console.log("url: " + url);
     request({
         method: 'POST',
         uri: url,
@@ -179,6 +178,7 @@ app.get('/courses', (req, res) => {
     let token = req.query.token;
     let url = "http://93.104.214.51/dashboard/local/api/?action=availableCourses&authtoken=" +
         token;
+    console.log("url per prendere corsi da moddle: " + url);
     request({
         method: 'GET',
         uri: url,
@@ -203,7 +203,6 @@ app.get('/courses', (req, res) => {
 app.get('/registeredCourses', (req, res) => {
     let playerId = req.query.playerId;
     let url = process.env.NODE_GE_STATUS + "/" + process.env.NODE_GAME_ID + "/" + playerId;
-    console.log(url);
     // GAMIFICATION API ALL TO RETRIEVE THE PLAYER STATUS
 
     var options = {
@@ -235,7 +234,6 @@ app.get('/registeredCourses', (req, res) => {
             }
 
             // const person = {firstName:"John", lastName:"Doe", age:50, eyeColor:"blue"};
-            console.log("here I return the student courses");
             res.send(finalRegistration);
         }
 
@@ -305,10 +303,11 @@ app.get('/playerStatus', (req, res) => {
 });
 
 app.post('/registerCourse', (req, res) => {
-
+    console.log("qui si registra ad un corso");
     let playerId = req.body.playerId;
     let courseTitle = req.body.course.title;
     let courseId = req.body.course.id;
+
 
     let urlGE = process.env.NODE_GE_EXECUTION;
 
@@ -333,13 +332,18 @@ app.post('/registerCourse', (req, res) => {
 
 
     request(options, function (error, response) {
+
         if (error) throw new Error(error);
         if (error) {
+            console.log("error: " + error);
             res.send("error");
         }
         else if (response.statusCode == 200) {
             console.log("course added to the player");
             res.send("OK");
+        }
+        else {
+            console.log("CODICE ERRORE: " + response.statusCode);
         }
 
     });
