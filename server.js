@@ -125,6 +125,7 @@ app.get('/nextQuestion', (req, res) => {
                 res.send(question);
 
             } else {
+
                 res.send("error");
             }
 
