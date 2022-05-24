@@ -8,7 +8,8 @@ var config =
         user: '',
         password: '',
         database: 'db_quiz'
-    }
+    },
+    collNameQuizes:'quiz'
 };
 
 module.exports = config;

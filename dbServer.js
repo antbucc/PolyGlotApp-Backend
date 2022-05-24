@@ -11,6 +11,10 @@ const port = 3030
 var url="mongodb://"+config.connection.host+":"+config.port+"/"+config.connection.database;
 console.log("url database:  "+ url);
 
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  var dbo = db.db(config.connection.database);
+
 app.get('/', (req, res) => {
   res.send('Hello, from database!')
 })
@@ -19,18 +23,12 @@ app.get('/', (req, res) => {
 app.get('/question', (req, res) => {
   let c=req.query.course;
   let t= req.query.topic;
-  MongoClient.connect(url, function(err, db) {
-      if (err) throw err;
-      let dbo = db.db(config.connection.database);
-        dbo.collection("quiz").aggregate([{ $match: { course:c,topic:t} },{ $sample: { size: 1 } }  ]).toArray(function(err, _res) {
+        dbo.collection(config.collNameQuizes).aggregate([{ $match: { course:c,topic:t} },{ $sample: { size: 1 } }  ]).toArray(function(err, _res) {
         if (err) throw err;
         //console.log(_res);
         res.send(_res);
-        db.close();
       });  
-    });
-
-})
+});
 
 app.get('/insert', (req, res) => {
   //autoConvertXML();
@@ -72,10 +70,10 @@ app.get('/insert', (req, res) => {
 
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
-  
+    
     var dbo = db.db(config.connection.database);
     
-    dbo.collection("quiz").insertMany(arrTmp, function(err, res) {
+    dbo.collection(config.collNameQuizes).insertMany(arrTmp, function(err, res) {
       if (err) throw err;
   
       console.log("query executed");
@@ -139,10 +137,11 @@ function createNewJSON(qJson){
         q.answer[counter]=a;
         counter++;
       });
-      let m=JSON.stringify(q);
-      newJson.push(JSON.parse(m));
 
-      //checkIfExist(q);
+      //if (!checkIfExist(q)) {
+        let m=JSON.stringify(q);
+        newJson.push(JSON.parse(m));
+      //}
     }
 
   };
@@ -150,21 +149,17 @@ function createNewJSON(qJson){
 }
 
 function checkIfExist(q){
-  let ans=false;
-  MongoClient.connect(url, function(err, db) {
-    if (err) throw err;
-    var dbo = db.db(config.connection.database);
-    dbo.collection("quiz").find({idnumber:q.idnumber,course:q.course}).toArray(function(err, res) {
+  let ans;
+  dbo.collection(config.collNameQuizes).find({idnumber:q.idnumber,course:q.course}).toArray(function(err, res) {
       if (err) throw err;
       if(res.length>1){
         console.log("true");
         ans=true;
       }else{
         console.log("false");
+        ans=false;
       }
-      db.close();
     });
-  });
   return ans;
 };
 
@@ -173,3 +168,4 @@ app.listen(port, () => {
   console.log(`listening on port ${port}`)
 })
 
+});
