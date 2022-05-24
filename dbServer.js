@@ -66,20 +66,11 @@ app.get('/insert', (req, res) => {
  */
  function insertFromXML(file){
   var quizes = require(file);
-      let arrTmp=createNewJSON(quizes.quiz.question);
-
-  MongoClient.connect(url, function(err, db) {
-    if (err) throw err;
-    
-    var dbo = db.db(config.connection.database);
-    
+      let arrTmp=createNewJSON(quizes.quiz.question);    
     dbo.collection(config.collNameQuizes).insertMany(arrTmp, function(err, res) {
       if (err) throw err;
-  
       console.log("query executed");
-      db.close();
     });
-  });
   console.log("END");
 }
 
