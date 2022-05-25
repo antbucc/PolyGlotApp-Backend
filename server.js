@@ -40,7 +40,6 @@ app.get('/login', (req, res) => {
 
             // const myJson = JSON.stringify(response.body);
             var success = JSON.parse(response.body).success;
-            console.log(JSON.parse(response.body));
             if (error) {
                 console.log("this is my error:" + error);
                 console.log("this is my response: " + response);
@@ -110,7 +109,6 @@ app.get('/nextQuestion', (req, res) => {
     let url = "http://93.104.214.51/dashboard/local/api/?action=nextQuestion&courseid=" +
         courseid + "&authtoken=" + token;
 
-    console.log(url);
     request({
         method: 'GET',
         uri: url,
@@ -144,7 +142,6 @@ app.get('/questionOptions', (req, res) => {
     let url = "http://93.104.214.51/dashboard/local/api/?action=questionOptions&authtoken=" +
         token + "&questionid=" + questionid;
 
-    console.log(url);
 
     request({
         method: 'GET',
@@ -179,7 +176,6 @@ app.get('/courses', (req, res) => {
     let token = req.query.token;
     let url = "http://93.104.214.51/dashboard/local/api/?action=availableCourses&authtoken=" +
         token;
-    console.log("url per prendere corsi da moddle: " + url);
     request({
         method: 'GET',
         uri: url,
@@ -304,7 +300,6 @@ app.get('/playerStatus', (req, res) => {
 });
 
 app.post('/registerCourse', (req, res) => {
-    console.log("qui si registra ad un corso");
     let playerId = req.body.playerId;
     let courseTitle = req.body.course.title;
     let courseId = req.body.course.id;
@@ -387,6 +382,8 @@ app.post('/noAnswer', (req, res) => {
 });
 app.post('/correctAnswer', (req, res) => {
 
+    console.log("CORRECT ANSWER API INVOKED");
+
     let playerId = req.body.playerId;
     let difficulty = req.body.quiz.difficulty;
     let time = req.body.quiz.time;
@@ -421,6 +418,7 @@ app.post('/correctAnswer', (req, res) => {
             res.send("error");
         }
         else if (response.statusCode == 200) {
+            console.log("CORRECT ANSWER API INVOKED: " + response);
             console.log("xp added at the player for correct answer - OK");
             res.send("OK");
         }
@@ -438,6 +436,7 @@ app.post('/wrongAnswer', (req, res) => {
 
     let urlGE = process.env.NODE_GE_EXECUTION;
 
+
     var options = {
         'method': 'POST',
         'url': urlGE,
@@ -448,7 +447,7 @@ app.post('/wrongAnswer', (req, res) => {
         body: JSON.stringify({
             "gameId": process.env.NODE_GAME_ID,
             "playerId": playerId,
-            "actionId": "correctAnswer",
+            "actionId": "wrongAnswer",
             "data": {
                 "difficulty": difficulty
             }
