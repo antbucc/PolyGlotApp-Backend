@@ -470,4 +470,111 @@ app.post('/wrongAnswer', (req, res) => {
 
 
 });
+
+
+
+app.post('/changeQuestion', (req, res) => {
+    let playerId = req.body.playerId;
+
+    let urlGE = process.env.NODE_GE_EXECUTION;
+
+    var options = {
+        'method': 'POST',
+        'url': urlGE,
+        'headers': {
+            'Authorization': process.env.NODE_GE_AUTH,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "gameId": process.env.NODE_GAME_ID,
+            "playerId": playerId,
+            "actionId": "changeQuestion"
+        })
+
+    };
+
+
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+        if (error) {
+            res.send("error");
+        }
+        else if (response.statusCode == 200) {
+            console.log("Bonus reduced for change question action - OK");
+            res.send("OK");
+        }
+
+    });
+});
+
+
+app.post('/deleteAnswer', (req, res) => {
+    let playerId = req.body.playerId;
+
+    let urlGE = process.env.NODE_GE_EXECUTION;
+
+    var options = {
+        'method': 'POST',
+        'url': urlGE,
+        'headers': {
+            'Authorization': process.env.NODE_GE_AUTH,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "gameId": process.env.NODE_GAME_ID,
+            "playerId": playerId,
+            "actionId": "deleteAnswer"
+        })
+
+    };
+
+
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+        if (error) {
+            res.send("error");
+        }
+        else if (response.statusCode == 200) {
+            console.log("Bonus reduced for delete answer action - OK");
+            res.send("OK");
+        }
+
+    });
+});
+
+app.post('/addTime', (req, res) => {
+    let playerId = req.body.playerId;
+
+    let urlGE = process.env.NODE_GE_EXECUTION;
+
+    var options = {
+        'method': 'POST',
+        'url': urlGE,
+        'headers': {
+            'Authorization': process.env.NODE_GE_AUTH,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "gameId": process.env.NODE_GAME_ID,
+            "playerId": playerId,
+            "actionId": "addTime"
+        })
+
+    };
+
+
+    request(options, function (error, response) {
+        if (error) throw new Error(error);
+        if (error) {
+            res.send("error");
+        }
+        else if (response.statusCode == 200) {
+            console.log("Bonus reduced for add time action - OK");
+            res.send("OK");
+        }
+
+    });
+});
+
+
 app.listen(port, () => console.log(`PolyGlot App listening on port ${port}!`));
