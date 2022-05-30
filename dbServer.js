@@ -4,11 +4,13 @@ var encoder = new util.TextEncoder('utf-8');
 //var cor_st= require('core-js/stable');
 var MongoClient = require('mongodb').MongoClient;
 var config = require('./local_config.js');
-const express = require('express')
+const express = require('express');
+const request = require('request');
 var cors = require('cors'); 
-const app = express()
+const app = express();
 app.use(cors());
-const port = 3030
+const port = 3030;
+
 
 var url="mongodb://"+config.connection.host+":"+config.port+"/"+config.connection.database;
 console.log("url database:  "+ url);
