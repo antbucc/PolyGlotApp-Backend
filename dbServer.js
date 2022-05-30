@@ -4,9 +4,10 @@ var encoder = new util.TextEncoder('utf-8');
 //var cor_st= require('core-js/stable');
 var MongoClient = require('mongodb').MongoClient;
 var config = require('./local_config.js');
-const express = require('express')
-const app = express()
-const port = 3030
+const express = require('express');
+const app = express();
+const request = require('request');
+const port = 3030;
 
 var url="mongodb://"+config.connection.host+":"+config.port+"/"+config.connection.database;
 console.log("url database:  "+ url);
@@ -25,7 +26,6 @@ app.get('/question', (req, res) => {
   let t= req.query.topic;
         dbo.collection(config.collNameQuizes).aggregate([{ $match: { course:c,topic:t} },{ $sample: { size: 1 } }  ]).toArray(function(err, _res) {
         if (err) throw err;
-        //console.log(_res);
         res.send(_res);
       });  
 });
@@ -37,7 +37,44 @@ app.get('/insert', (req, res) => {
   res.send("Update executed");
 })
 
+app.get('/login', (req, res) => {
 
+  let username = req.query.username;
+  let password = req.query.password;
+  let url =
+      "http://93.104.214.51/dashboard/local/api/?action=login&username=" +
+      username +
+      "&password=" +
+      password;
+  request({
+      method: 'POST',
+      uri: url,
+  },
+      function (error, response, body) {
+
+          // const myJson = JSON.stringify(response.body);
+          var success = JSON.parse(response.body).success;
+          console.log(JSON.parse(response.body));
+          if (error) {
+              console.log("this is my error:" + error);
+              console.log("this is my response: " + response);
+              res.send("error");
+          }
+          else if (success) {
+              // here I have the student token
+              console.log("Login with success");
+              let currentToken = JSON.parse(response.body).response;
+              var token = currentToken;
+              res.send(currentToken);
+          }
+          else {
+              res.send("no-login");
+          }
+
+
+      })
+
+});
 
 //******************************************************************************************************************************************* */
 
