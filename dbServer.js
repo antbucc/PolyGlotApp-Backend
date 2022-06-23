@@ -604,7 +604,23 @@ app.post('/addTime', (req, res) => {
 
   //example    GET /analyticsSum
   app.get("/analyticsSum", (req, res) => {
-    dbo.collection("analytics").find({},{projection:{category:1,title:1,"chart.options.chart.type":1}}).toArray(function(err, _res) {
+    let aggregation = [{
+      $project: {
+        title: 1,
+        category: 1,
+        custom: 1,
+        "chart.options.chart.type": { $ifNull: ["$chart.options.chart.type", ""] },
+        buildTable: { $cond: [{ $ifNull: ["$table", false] }, true, false] },
+        buildFilters: { $cond: [{ $ifNull: ["$filters", false] }, true, false] }
+      }
+    }]
+    let category = Number(req.query.category)
+    if (Number.isNaN(category)) {
+      throw "Invalid category"
+    } else if (category != undefined) {
+      aggregation.push({ $match: { category: category }})
+    }
+    dbo.collection("analytics").aggregate(aggregation).toArray(function (err, _res) {
       if (err) throw err;
       res.send(_res);
     });
@@ -614,12 +630,12 @@ app.post('/addTime', (req, res) => {
   app.get("/analytics", (req, res) => {
     let id = req.query.analyticId;
     if (id == undefined) {
-      dbo.collection("analytics").find({}).toArray(function(err, _res) {
+      dbo.collection("analytics").find({}).toArray(function (err, _res) {
         if (err) throw err;
         res.send(_res);
       });
     } else {
-      dbo.collection("analytics").findOne({_id: id})
+      dbo.collection("analytics").findOne({ _id: id })
         .then(analytic => {
           res.send(analytic)
         })
