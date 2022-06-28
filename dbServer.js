@@ -87,39 +87,42 @@ MongoClient.connect(url, function(err, db) {
 
   });
 
-  app.get('/role', (req, res) => {
-
-    let token = req.query.token;
-    let courseId = req.query.courseid;
-
-    let url =
-        "http://93.104.214.51/dashboard/local/api/?action=role&authtoken=" +
-        token + "&courseid=" + courseId;
-    request({
-        method: 'POST',
-        uri: url,
-    },
+  function getRoles(token,courseId) {
+    return new Promise((resolve,reject) => {
+        let url =
+            "http://93.104.214.51/dashboard/local/api/?action=role&authtoken=" +
+            token + "&courseid=" + courseId;
+        request({
+            method: 'POST',
+            uri: url,
+        },
         function (error, response, body) {
 
             var success = JSON.parse(response.body).success;
             if (error) {
                 console.log("this is my error:" + error);
                 console.log("this is my response: " + response);
-                res.send("error");
+                reject("error");
             }
             else if (success) {
                 // here I have the user role
                 console.log("Role with success");
                 let currentRole = JSON.parse(response.body).response;
-                var role = currentRole;
-                res.send(currentRole);
+                resolve(currentRole);
             }
             else {
-                res.send("no-role");
+                resolve("no-role");
             }
-
-
         })
+    })
+  }
+
+  app.get('/role', (req, res) => {
+
+    let token = req.query.token;
+    let courseId = req.query.courseid;
+
+    getRoles(token,courseId).then(roles => res.send(roles));
 
 });
 
@@ -603,20 +606,39 @@ app.post('/addTime', (req, res) => {
   //******************************************************************************************************************************************* */
 
   //example    GET /analyticsSum
-  app.get("/analyticsSum", (req, res) => {
+  app.get("/analyticsSum", async (req, res) => {
+
+    let token = req.query.token;
+    let courseId = req.query.courseid;
+
+    let roles = await getRoles(token,courseId);
+    switch (roles) {
+        case "error":
+            throw new Error("Invalid parameters");
+        case "no-role":
+            roles = ["no-role"]
+            break;
+        default:
+            roles = (roles.some(role => role.shortname === 'student')) ? ["student"] : roles.map(role => role.shortname);
+            break;
+    }
+
     let aggregation = [{
-      $project: {
-        title: 1,
-        category: 1,
-        custom: 1,
-        "chart.options.chart.type": { $ifNull: ["$chart.options.chart.type", ""] },
-        buildTable: { $cond: [{ $ifNull: ["$table", false] }, true, false] },
-        buildFilters: { $cond: [{ $ifNull: ["$filters", false] }, true, false] }
-      }
-    }]
+            $match: { permissions: { $in: roles } }
+        },
+        {
+            $project: {
+                title: 1,
+                category: 1,
+                custom: 1,
+                "chart.options.chart.type": { $ifNull: ["$chart.options.chart.type", ""] },
+                buildTable: { $cond: [{ $ifNull: ["$table", false] }, true, false] },
+                buildFilters: { $cond: [{ $ifNull: ["$filters", false] }, true, false] }
+            }
+    }];
     let category = Number(req.query.category)
     if (Number.isNaN(category)) {
-      throw "Invalid category"
+      throw new Error("Invalid category");
     } else if (category != undefined) {
       aggregation.push({ $match: { category: category }})
     }
