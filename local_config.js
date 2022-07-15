@@ -9,7 +9,8 @@ var config =
         password: '',
         database: 'db_quiz'
     },
-    collNameQuizes:'quiz'
+    collNameQuizes:'quiz',
+    collNameAnalytics:'analytics'
 };
 
 module.exports = config;

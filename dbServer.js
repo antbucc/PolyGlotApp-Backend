@@ -35,10 +35,20 @@ MongoClient.connect(url, function(err, db) {
   app.get('/question', (req, res) => {
     let c=req.query.course;
     let t= req.query.topic;
-          dbo.collection(config.collNameQuizes).aggregate([{ $match: { course:c,topic:t} },{ $sample: { size: 1 } }  ]).toArray(function(err, _res) {
-          if (err) throw err;
-          res.send(_res);
-        });  
+    let id = req.query.id;
+    let aggregation = (Number.parseInt(id) != NaN) ? [{ $match: { idnumber: id } }] : [{ $match: { course:c,topic:t} },{ $sample: { size: 1 } }  ];
+    dbo.collection(config.collNameQuizes).aggregate(aggregation).toArray(function(err, _res) {
+        if (err) throw err;
+        res.send(_res);
+    });
+  });
+
+  app.get('/questions', (req, res) => {
+    let c=req.query.course;
+    dbo.collection(config.collNameQuizes).aggregate([{ $match: { course:c } }]).toArray(function(err, _res) {
+        if (err) throw err;
+        res.send(_res);
+    });
   });
 
   app.get('/insert', (req, res) => {
@@ -642,7 +652,7 @@ app.post('/addTime', (req, res) => {
     } else if (category != undefined) {
       aggregation.push({ $match: { category: category }})
     }
-    dbo.collection("analytics").aggregate(aggregation).toArray(function (err, _res) {
+    dbo.collection(config.collNameAnalytics).aggregate(aggregation).toArray(function (err, _res) {
       if (err) throw err;
       res.send(_res);
     });
@@ -652,12 +662,12 @@ app.post('/addTime', (req, res) => {
   app.get("/analytics", (req, res) => {
     let id = req.query.analyticId;
     if (id == undefined) {
-      dbo.collection("analytics").find({}).toArray(function (err, _res) {
+      dbo.collection(config.collNameAnalytics).find({}).toArray(function (err, _res) {
         if (err) throw err;
         res.send(_res);
       });
     } else {
-      dbo.collection("analytics").findOne({ _id: id })
+      dbo.collection(config.collNameAnalytics).findOne({ _id: id })
         .then(analytic => {
           res.send(analytic)
         })
