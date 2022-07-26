@@ -5,7 +5,7 @@
   "main": "dbServer.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node dbServer.js"
   },
   "author": "Antonio Bucchiarone",
   "license": "ISC",
@@ -14,7 +14,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
-    "mongodb": "^4.6.0",
+    "mongodb": "^4.7.0",
     "node-fetch": "^3.2.3",
     "request": "^2.88.2",
     "stable": "^0.1.8",

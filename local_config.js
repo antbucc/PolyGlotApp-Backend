@@ -10,7 +10,8 @@ var config =
         database: 'db_quiz'
     },
     collNameQuizes:'quiz',
-    collNameAnalytics:'analytics'
+    collNameAnalytics:'analytics',
+    collNameUsers:'users'
 };
 
 module.exports = config;

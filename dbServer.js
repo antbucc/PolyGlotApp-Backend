@@ -10,6 +10,7 @@ var cors = require('cors');
 require('dotenv').config();
 const bodyParser = require('body-parser');
 const { env, allowedNodeEnvironmentFlags } = require('process');
+const { Console } = require('console');
 
 const app = express();
 app.use(cors());
@@ -58,6 +59,7 @@ MongoClient.connect(url, function(err, db) {
     res.send("{totalQuest:X, totalInsert: Y}");
   })
 
+
   app.get('/login', (req, res) => {
 
     let username = req.query.username;
@@ -91,8 +93,6 @@ MongoClient.connect(url, function(err, db) {
             else {
                 res.send("no-login");
             }
-
-
         })
 
   });
@@ -787,3 +787,40 @@ app.post('/addTime', (req, res) => {
   })
 
 });
+
+/************************************************************************************************************ */
+  //NEW COLLECTION USERS
+  app.get('/insertusers', (req, res) => {
+    console.log("/insertusers");
+    let ris= insertFromJSON('./json_data_users.json');
+    res.send("{totalUser:"+ris.split(',')[0]+", totalInsert:"+ris.split(',')[1]+"}");
+    //res.send("OK");
+  })
+
+  /**
+   * 
+   * @param {*} file file JSON con tutti query utenti da inserire in mongodb
+   */
+   function insertFromJSON(file){
+    let arrTmp = require(file);
+    let total=arrTmp.length;
+    let ti=0;
+    arrTmp.forEach(u => {
+  
+    dbo.collection(config.collNameUsers).find({userid:u.userid,quizid:u.questionid,course:u.course}).toArray(function(err, res) {
+      if (err) throw err;
+      console.log(res.length);
+      if(res.length>0){
+        console.log("L'utente: "+u.userid + " con il quiz "+u.questionid+" del corso "+u.course+" esiste già!"); 
+      }else{
+        dbo.collection(config.collNameUsers).insertOne(u, function(err, res) {
+          if (err) throw err;
+          ti++;
+        });
+      }
+      });
+    });
+    return total+","+ti;
+  }
+
+/************************************************************************************************************ */
