@@ -801,7 +801,7 @@ app.post('/addTime', (req, res) => {
     let ti=0;
     arrTmp.forEach(u => {
   
-    dbo.collection(config.collNameUsers).find({userid:u.userid,quizid:u.questionid,course:u.course}).toArray(function(err, res) {
+    dbo.collection(config.collNameUsers).find({userid:u.userid,questionid:u.questionid,course:u.course}).toArray(function(err, res) {
       if (err) throw err;
       console.log(res.length);
       if(res.length>0){
