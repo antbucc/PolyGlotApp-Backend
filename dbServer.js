@@ -782,13 +782,7 @@ app.post('/addTime', (req, res) => {
     return newJson;
   }
 
-  app.listen(port, () => {
-    console.log(`PolyGlot App listening on port ${port}!`)
-  })
-
-});
-
-/************************************************************************************************************ */
+  /************************************************************************************************************ */
   //NEW COLLECTION USERS
   app.get('/insertusers', (req, res) => {
     console.log("/insertusers");
@@ -824,3 +818,9 @@ app.post('/addTime', (req, res) => {
   }
 
 /************************************************************************************************************ */
+
+  app.listen(port, () => {
+    console.log(`PolyGlot App listening on port ${port}!`)
+  })
+
+});
