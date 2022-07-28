@@ -11,6 +11,7 @@ require('dotenv').config();
 const bodyParser = require('body-parser');
 const { env, allowedNodeEnvironmentFlags } = require('process');
 const { Console } = require('console');
+const { response } = require('express');
 
 const app = express();
 app.use(cors());
@@ -783,40 +784,49 @@ app.post('/addTime', (req, res) => {
   }
 
   /************************************************************************************************************ */
-  //NEW COLLECTION USERS
-  app.get('/insertusers', (req, res) => {
-    console.log("/insertusers");
-    let ris= insertFromJSON('./json_data_users.json');
-    res.send("{totalUser:"+ris.split(',')[0]+", totalInsert:"+ris.split(',')[1]+"}");
-    //res.send("OK");
-  })
-
+  //NEW COLLECTION ANSWER
+ 
   /**
    * 
-   * @param {*} file file JSON con tutti query utenti da inserire in mongodb
+   * @param {*} file JSON con tutti query Answer da inserire in mongodb
    */
-   function insertFromJSON(file){
-    let arrTmp = require(file);
-    let total=arrTmp.length;
-    let ti=0;
-    arrTmp.forEach(u => {
-  
-    dbo.collection(config.collNameUsers).find({userid:u.userid,questionid:u.questionid,course:u.course}).toArray(function(err, res) {
+   function insertAnswerFromPOST(file){
+    console.log(file);
+    console.log("INSERT ANSWER IN MONGODB");
+    dbo.collection(config.collNameAnswer).find({playerid:file.playerid,questionid:file.questionid,course:file.course}).toArray(function(err, res) {
       if (err) throw err;
-      console.log(res.length);
       if(res.length>0){
-        console.log("L'utente: "+u.userid + " con il quiz "+u.questionid+" del corso "+u.course+" esiste già!"); 
+        console.log("ERROR");
+        console.log("L'utente: "+file.playerid + " con il quiz "+file.questionid+" del corso "+file.course+" esiste già!"); 
       }else{
-        dbo.collection(config.collNameUsers).insertOne(u, function(err, res) {
+        dbo.collection(config.collNameAnswer).insertOne(file, function(err, res) {
           if (err) throw err;
-          ti++;
-        });
+         });
       }
       });
-    });
-    return total+","+ti;
+
   }
 
+// /saveAnswer?playerId=11111&questionid=222222&course=SE&date=DATAA&time=TIME&outcome=OK
+  app.post('/saveAnswer',(req, res) => {
+
+    console.log("SAVE ANSWER API INVOKED");
+
+    let response = {  
+        playerid:req.query.playerId,  
+        questionid:req.query.questionid,
+        course:req.query.course,
+        date:req.query.date,
+        time:req.query.time,
+        outcome:req.query.outcome
+    };  
+    //console.log(response);
+    insertAnswerFromPOST(response);
+
+    res.end(JSON.stringify(response));
+   // res.end("OK");
+
+});
 /************************************************************************************************************ */
 
   app.listen(port, () => {

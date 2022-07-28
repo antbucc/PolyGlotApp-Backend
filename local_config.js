@@ -11,7 +11,7 @@ var config =
     },
     collNameQuizes:'quiz',
     collNameAnalytics:'analytics',
-    collNameUsers:'users'
+    collNameAnswer:'answers'
 };
 
 module.exports = config;
