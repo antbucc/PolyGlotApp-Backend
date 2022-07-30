@@ -543,5 +543,5 @@
   "title": "Leaderboard",
   "category": 1,
   "custom": true,
-  "permissions": ["teacher"]
+  "permissions": ["student","teacher"]
 }]
