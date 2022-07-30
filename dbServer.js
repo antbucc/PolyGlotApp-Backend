@@ -47,7 +47,9 @@ MongoClient.connect(url, function(err, db) {
 
   app.get('/questions', (req, res) => {
     let c=req.query.course;
-    dbo.collection(config.collNameQuizes).aggregate([{ $match: { course:c } }]).toArray(function(err, _res) {
+    let qz = req.query.quizzes;
+    let aggregation = qz == undefined ? [{ $match: { course:c } }] : [{ $match: { course:c, idnumber: { $in: qz.split(",") } } }];
+    dbo.collection(config.collNameQuizes).aggregate(aggregation).toArray(function(err, _res) {
         if (err) throw err;
         res.send(_res);
     });
@@ -633,6 +635,7 @@ app.post('/addTime', (req, res) => {
             roles = (roles.some(role => role.shortname === 'student')) ? ["student"] : roles.map(role => role.shortname);
             break;
     }
+    //roles = ["teacher"];
 
     let aggregation = [{
             $match: { permissions: { $in: roles } }
@@ -813,20 +816,41 @@ app.post('/addTime', (req, res) => {
     console.log("SAVE ANSWER API INVOKED");
 
     let response = {  
-        playerid:req.query.playerId,  
+        playerid:req.query.playerId,
         questionid:req.query.questionid,
         course:req.query.course,
-        date:req.query.date,
+        date:new Date().toISOString(),
         time:req.query.time,
         outcome:req.query.outcome
-    };  
-    //console.log(response);
+    };
     insertAnswerFromPOST(response);
 
     res.end(JSON.stringify(response));
    // res.end("OK");
 
 });
+
+app.get('/answers', (req, res) => {
+    let params = {
+        playerid: req.query.playerId,
+        questionid: req.query.questionid,
+        course: req.query.course,
+        date: req.query.date,
+        time: req.query.time,
+        outcome: req.query.outcome,
+    }
+    let aggregation = [{ $match: {} }];
+    for (const key of Object.keys(params)) {
+        if (params[key] != undefined) {
+            aggregation[0].$match[key] = params[key];
+        }
+    }
+    dbo.collection(config.collNameAnswer).aggregate(aggregation).toArray((err, _res) => {
+        if (err) throw err;
+        res.send(_res);
+    });
+  });
+
 /************************************************************************************************************ */
 
   app.listen(port, () => {

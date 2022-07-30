@@ -1,0 +1,547 @@
+[{
+  "_id": "0",
+  "title": "Quiz summary",
+  "category": 0,
+  "custom": false,
+  "permissions": [
+    "teacher"
+  ],
+  "table": {
+    "head": [],
+    "firstColumn": [
+      "Correct answer",
+      "Wrong answer",
+      "No answer",
+      "No partecipation"
+    ]
+  },
+  "chart": {
+    "options": {
+      "chart": {
+        "type": "pie"
+      },
+      "colors": [
+        "#00d88f",
+        "#ff6279",
+        "#ffbf42",
+        "#b5b5b5"
+      ],
+      "dataLabels": {
+        "style": {
+          "fontSize": "18px"
+        }
+      },
+      "labels": [
+        "Correct answer",
+        "Wrong answer",
+        "No answer",
+        "No partecipation"
+      ],
+      "tooltip": {
+        "style": {
+          "fontSize": "18px"
+        }
+      },
+      "responsive": [
+        {
+          "breakpoint": 640,
+          "options": {
+            "legend": {
+              "position": "bottom"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "filters": [
+    {
+      "title": "Quiz",
+      "ref": "quiz",
+      "dataType": "id",
+      "selected": {
+        "name": "3",
+        "view_name": "Last: BPMN"
+      },
+      "options": [
+        {
+          "name": "3",
+          "view_name": "Last: BPMN",
+          "default": true
+        },
+        {
+          "name": "2",
+          "view_name": "Non-functional requirements",
+          "default": false
+        },
+        {
+          "name": "1",
+          "view_name": "Functional requirements",
+          "default": false
+        }
+      ]
+    }
+  ]
+},{
+  "_id": "1",
+  "title": "Quiz comparison by topic",
+  "category": 0,
+  "custom": false,
+  "permissions": [
+    "teacher"
+  ],
+  "table": {
+    "head": [
+      "",
+      "Correct answer",
+      "Wrong answer",
+      "No answer"
+    ],
+    "firstColumn": [
+      "Use case diagram",
+      "Non-functional requirements",
+      "Functional requirements",
+      "BPMN",
+      "Class diagrams",
+      "Design thinking",
+      "Scrum",
+      "Git",
+      "Node.js",
+      "WebAPI",
+      "MongoDB",
+      "Github actions"
+    ]
+  },
+  "chart": {
+    "options": {
+      "chart": {
+        "type": "bar",
+        "stacked": true,
+        "toolbar": {
+          "show": false
+        }
+      },
+      "plotOptions": {
+        "bar": {
+          "horizontal": false,
+          "borderRadius": 10
+        }
+      },
+      "xaxis": {
+        "type": "category",
+        "categories": [
+          "Use case diagram",
+          "Non-functional requirements",
+          "Functional requirements",
+          "BPMN",
+          "Class diagrams",
+          "Scrum",
+          "Design thinking",
+          "WebAPI",
+          "MongoDB"
+        ],
+        "title": {
+          "text": "Topic"
+        },
+        "labels": {
+          "trim": true
+        }
+      },
+      "yaxis": {
+        "title": {
+          "text": "Students"
+        }
+      },
+      "responsive": [
+        {
+          "breakpoint": 640,
+          "options": {
+            "dataLabels": {
+              "enabled": false
+            },
+            "plotOptions": {
+              "bar": {
+                "horizontal": true
+              }
+            },
+            "xaxis": {
+              "title": {
+                "text": "Students"
+              }
+            },
+            "yaxis": {
+              "labels": {
+                "maxWidth": 100
+              },
+              "title": {
+                "text": "Topic"
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "filters": [
+    {
+      "title": "Topic",
+      "ref": "topic",
+      "dataType": "id",
+      "selected": {
+        "name": "3",
+        "view_name": "Last: BPMN"
+      },
+      "options": [
+        {
+          "name": "3",
+          "view_name": "Last: BPMN",
+          "default": true
+        },
+        {
+          "name": "2",
+          "view_name": "Non-functional requirements",
+          "default": false
+        },
+        {
+          "name": "1",
+          "view_name": "Functional requirements",
+          "default": false
+        }
+      ]
+    },
+    {
+      "title": "Data range",
+      "ref": "dataRange",
+      "dataType": "dataRange",
+      "selected": {
+        "name": "13-09-2021_22-04-2022",
+        "view_name": "This course year"
+      },
+      "options": [
+        {
+          "name": "13-09-2021_22-04-2022",
+          "view_name": "This course year",
+          "default": true
+        }
+      ]
+    }
+  ]
+},{
+  "_id": "2",
+  "title": "Learning-Partecipation summary",
+  "category": 0,
+  "custom": true,
+  "permissions": [
+    "teacher"
+  ],
+  "chart": {
+    "options": {
+      "annotations": {
+        "position": "back",
+        "xaxis": [],
+        "yaxis": []
+      },
+      "chart": {
+        "type": "scatter",
+        "offsetX": 10,
+        "toolbar": {
+          "show": false
+        },
+        "zoom": {
+          "enabled": false
+        }
+      },
+      "colors": [
+        "#a4ab27",
+        "#d17e26"
+      ],
+      "dataLabels": {
+        "enabled": false
+      },
+      "grid": {
+        "xaxis": {
+          "lines": {
+            "show": false
+          }
+        },
+        "yaxis": {
+          "lines": {
+            "show": false
+          }
+        }
+      },
+      "markers": {
+        "size": 10
+      },
+      "states": {
+        "active": {
+          "filter": {
+            "type": "none"
+          }
+        },
+        "hover": {
+          "filter": {
+            "type": "none"
+          }
+        }
+      },
+      "tooltip": {
+        "enabled": false
+      },
+      "yaxis": {
+        "labels": {
+          "show": false
+        },
+        "min": 0,
+        "max": 100,
+        "title": {
+          "text": "Learning"
+        }
+      },
+      "xaxis": {
+        "labels": {
+          "show": false
+        },
+        "min": 0,
+        "max": 100,
+        "title": {
+          "text": "Partecipation"
+        }
+      }
+    }
+  }
+},{
+  "_id": "3",
+  "title": "Quiz log",
+  "category": 0,
+  "custom": true,
+  "permissions": [
+    "student"
+  ]
+},{
+  "_id": "4",
+  "title": "Learning level",
+  "category": 0,
+  "custom": false,
+  "permissions": [
+    "student"
+  ],
+  "table": {
+    "head": [
+      "",
+      "Learning level"
+    ],
+    "firstColumn": [
+      "Use case diagram",
+      "Non-functional requirements",
+      "Functional requirements",
+      "BPMN",
+      "Class diagrams",
+      "Design thinking",
+      "Scrum",
+      "Git",
+      "Node.js",
+      "WebAPI",
+      "MongoDB",
+      "Github actions"
+    ]
+  },
+  "chart": {
+    "options": {
+      "chart": {
+        "type": "bar",
+        "toolbar": {
+          "show": false
+        }
+      },
+      "colors": [
+        "#a4ab27"
+      ],
+      "dataLabels": {
+        "style": {
+          "fontSize": "18px"
+        }
+      },
+      "plotOptions": {
+        "bar": {
+          "horizontal": false,
+          "borderRadius": 10
+        }
+      },
+      "xaxis": {
+        "type": "category",
+        "categories": [
+          "Use case diagram",
+          "Non-functional requirements",
+          "Functional requirements",
+          "BPMN",
+          "Class diagrams",
+          "Design thinking",
+          "Scrum",
+          "Git",
+          "Node.js",
+          "WebAPI",
+          "MongoDB",
+          "Github actions"
+        ],
+        "labels": {
+          "trim": true
+        },
+        "title": {
+          "text": "Topic"
+        }
+      },
+      "yaxis": {
+        "max": 5,
+        "tickAmount": 5,
+        "title": {
+          "text": "Level"
+        }
+      },
+      "responsive": [
+        {
+          "breakpoint": 640,
+          "options": {
+            "dataLabels": {
+              "enabled": false
+            },
+            "plotOptions": {
+              "bar": {
+                "horizontal": true
+              }
+            },
+            "xaxis": {
+              "title": {
+                "text": "Level"
+              }
+            },
+            "yaxis": {
+              "labels": {
+                "maxWidth": 100
+              },
+              "title": {
+                "text": "Topic"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+},{
+  "_id": "5",
+  "title": "Partecipation level",
+  "category": 0,
+  "custom": false,
+  "permissions": [
+    "student"
+  ],
+  "table": {
+    "head": [
+      "",
+      "Partecipation level"
+    ],
+    "firstColumn": [
+      "Use case diagram",
+      "Non-functional requirements",
+      "Functional requirements",
+      "BPMN",
+      "Class diagrams",
+      "Design thinking",
+      "Scrum",
+      "Git",
+      "Node.js",
+      "WebAPI",
+      "MongoDB",
+      "Github actions"
+    ]
+  },
+  "chart": {
+    "options": {
+      "chart": {
+        "type": "bar",
+        "toolbar": {
+          "show": false
+        }
+      },
+      "colors": [
+        "#d17e26"
+      ],
+      "dataLabels": {
+        "style": {
+          "fontSize": "18px"
+        }
+      },
+      "plotOptions": {
+        "bar": {
+          "horizontal": false,
+          "borderRadius": 10
+        }
+      },
+      "xaxis": {
+        "type": "category",
+        "categories": [
+          "Use case diagram",
+          "Non-functional requirements",
+          "Functional requirements",
+          "BPMN",
+          "Class diagrams",
+          "Design thinking",
+          "Scrum",
+          "Git",
+          "Node.js",
+          "WebAPI",
+          "MongoDB",
+          "Github actions"
+        ],
+        "labels": {
+          "trim": true
+        },
+        "title": {
+          "text": "Topic"
+        }
+      },
+      "yaxis": {
+        "max": 5,
+        "tickAmount": 5,
+        "title": {
+          "text": "Level"
+        }
+      },
+      "responsive": [
+        {
+          "breakpoint": 640,
+          "options": {
+            "dataLabels": {
+              "enabled": false
+            },
+            "plotOptions": {
+              "bar": {
+                "horizontal": true
+              }
+            },
+            "xaxis": {
+              "title": {
+                "text": "Level"
+              }
+            },
+            "yaxis": {
+              "labels": {
+                "maxWidth": 100
+              },
+              "title": {
+                "text": "Topic"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+},{
+  "_id": "6",
+  "title": "Leaderboard",
+  "category": 1,
+  "custom": true,
+  "permissions": ["teacher"]
+}]

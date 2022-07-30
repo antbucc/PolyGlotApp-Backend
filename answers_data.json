@@ -1,0 +1,91 @@
+[{
+  "_id": {
+    "$oid": "62e25ff6d72d37a24f431a9d"
+  },
+  "questionid": "2",
+  "course": "Software Engineering",
+  "date": "2022-02-25T16:38:59.553Z",
+  "time": 25,
+  "outcome": "OK",
+  "playerid": "antbucc77"
+},{
+  "_id": {
+    "$oid": "62e25ff6d72d37a24f431a9e"
+  },
+  "questionid": "8",
+  "course": "Software Engineering",
+  "date": "2022-07-28T16:38:59.553Z",
+  "time": 50,
+  "outcome": "NOANSWER",
+  "playerid": "antbucc77"
+},{
+  "_id": {
+    "$oid": "62e55bc64d30c9895b271cf8"
+  },
+  "questionid": "2",
+  "course": "Software Engineering",
+  "date": "2022-02-25T14:38:59.553Z",
+  "time": 20,
+  "outcome": "OK",
+  "playerid": "antbucc10"
+},{
+  "_id": {
+    "$oid": "62e55bc64d30c9895b271cf9"
+  },
+  "questionid": "8",
+  "course": "Software Engineering",
+  "date": "2022-07-28T12:38:59.553Z",
+  "time": 25,
+  "outcome": "NOK",
+  "playerid": "antbucc10"
+},{
+  "_id": {
+    "$oid": "62e55bc64d30c9895b271cfa"
+  },
+  "questionid": "2",
+  "course": "Software Engineering",
+  "date": "2022-02-25T12:38:59.553Z",
+  "time": 20,
+  "outcome": "NOK",
+  "playerid": "dincau"
+},{
+  "_id": {
+    "$oid": "62e55bc64d30c9895b271cfb"
+  },
+  "questionid": "8",
+  "course": "Software Engineering",
+  "date": "2022-07-28T18:38:59.553Z",
+  "time": 25,
+  "outcome": "OK",
+  "playerid": "dincau"
+},{
+  "_id": {
+    "$oid": "62e55bc64d30c9895b271cfd"
+  },
+  "questionid": "8",
+  "course": "Software Engineering",
+  "date": "2022-07-28T9:38:59.553Z",
+  "time": 25,
+  "outcome": "NOK",
+  "playerid": "antbucc5577"
+},{
+  "_id": {
+    "$oid": "62e55bc64d30c9895b271cfe"
+  },
+  "questionid": "2",
+  "course": "Software Engineering",
+  "date": "2022-02-25T8:38:59.553Z",
+  "time": 20,
+  "outcome": "OK",
+  "playerid": "michela"
+},{
+  "_id": {
+    "$oid": "62e55bc64d30c9895b271cff"
+  },
+  "questionid": "8",
+  "course": "Software Engineering",
+  "date": "2022-07-28T8:38:59.553Z",
+  "time": 25,
+  "outcome": "OK",
+  "playerid": "michela"
+}]

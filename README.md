@@ -10,6 +10,8 @@ or
 
 ***
 
+## Setting
+
 ### Installation Node.js
 [Download nodejs](https://nodejs.org/it/download/)
 
@@ -29,7 +31,10 @@ v16.15.0
 npm install mongodb
 ```
 
+### Tables to create in the database before starting the server
 
-
+- quiz (for data import `quiz_data.json`)
+- analytics (for data import `analytics_data.json`)
+- answers (for data import `answers_data.json`)
 
 
