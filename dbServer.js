@@ -828,7 +828,29 @@ app.post('/addTime', (req, res) => {
 
 });
 /************************************************************************************************************ */
+//NEW POST INSERT FROM MOODLE
+app.post('/insertFromMoodle',(req, res) => {
 
+    console.log("insertFromMoodle API INVOKED");
+
+    let response = {  
+        idnumber:req.body.idnumber,
+        type:req.body.type,
+        name:req.body.name,
+        questiontext:req.body.questiontext,
+        generalfeedback:req.body.generalfeedback,
+        correctfeedback:req.body.correctfeedback,
+        partiallycorrectfeedback:req.body.partiallycorrectfeedback,
+        incorrectfeedback:req.body.incorrectfeedback,
+        difficulty:req.body.difficulty,
+        topic:req.body.topic,
+        course:req.body.course
+    }; 
+    console.log(response);
+    res.end("OK");
+
+});
+/******************************************************************** */
   app.listen(port, () => {
     console.log(`PolyGlot App listening on port ${port}!`)
   })
