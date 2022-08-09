@@ -58,7 +58,7 @@ MongoClient.connect(url, function(err, db) {
   app.get('/insert', (req, res) => {
     console.log("/insert");
     //autoConvertXML();
-    insertFromXML('./json_data.json');
+    insertFromXML('./quiz_data.json');
     res.send("{totalQuest:X, totalInsert: Y}");
   })
 
@@ -796,7 +796,7 @@ app.post('/addTime', (req, res) => {
    function insertAnswerFromPOST(file){
     console.log(file);
     console.log("INSERT ANSWER IN MONGODB");
-    dbo.collection(config.collNameAnswer).find({playerid:file.playerid,questionid:file.questionid,course:file.course}).toArray(function(err, res) {
+    dbo.collection(config.collNameAnswer).find({playerid:file.playerid,"question.idnumber":file.question.idnumber,"question.course":file.question.course}).toArray(function(err, res) {
       if (err) throw err;
       if(res.length>0){
         console.log("ERROR");
@@ -810,15 +810,29 @@ app.post('/addTime', (req, res) => {
 
   }
 
-// /saveAnswer?playerId=11111&questionid=222222&course=SE&date=DATAA&time=TIME&outcome=OK
-  app.post('/saveAnswer',(req, res) => {
+// /saveAnswer?playerId=11111&questionid=222222&course=SE&time=TIME&outcome=OK
+  app.post('/saveAnswer', async (req, res) => {
 
     console.log("SAVE ANSWER API INVOKED");
 
     let response = {  
         playerid:req.query.playerId,
-        questionid:req.query.questionid,
-        course:req.query.course,
+        question: await dbo.collection(config.collNameQuizes).findOne({
+            idnumber: req.query.questionid,
+            course: req.query.course,
+        },{
+            projection: {
+                _id: 0,
+                idnumber: 1,
+                name: 1,
+                topic: 1,
+                course: 1,
+                type: 1,
+                difficulty: 1,
+                questiontext: 1,
+                answer: 1,
+            }
+        }),
         date:new Date().toISOString(),
         time:req.query.time,
         outcome:req.query.outcome
@@ -833,8 +847,8 @@ app.post('/addTime', (req, res) => {
 app.get('/answers', (req, res) => {
     let params = {
         playerid: req.query.playerId,
-        questionid: req.query.questionid,
-        course: req.query.course,
+        "question.idnumber": req.query.questionid,
+        "question.course": req.query.course,
         date: req.query.date,
         time: req.query.time,
         outcome: req.query.outcome,
