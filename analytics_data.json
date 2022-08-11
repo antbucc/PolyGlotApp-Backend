@@ -53,38 +53,10 @@
         }
       ]
     }
-  },
-  "filters": [
-    {
-      "title": "Quiz",
-      "ref": "quiz",
-      "dataType": "id",
-      "selected": {
-        "name": "3",
-        "view_name": "Last: BPMN"
-      },
-      "options": [
-        {
-          "name": "3",
-          "view_name": "Last: BPMN",
-          "default": true
-        },
-        {
-          "name": "2",
-          "view_name": "Non-functional requirements",
-          "default": false
-        },
-        {
-          "name": "1",
-          "view_name": "Functional requirements",
-          "default": false
-        }
-      ]
-    }
-  ]
+  }
 },{
   "_id": "1",
-  "title": "Quiz comparison by topic",
+  "title": "Topics comparison",
   "category": 0,
   "custom": false,
   "permissions": [
@@ -93,26 +65,19 @@
   "table": {
     "head": [
       "",
+      "Quizzes",
       "Correct answer",
       "Wrong answer",
-      "No answer"
+      "No answer",
+      "No partecipation"
     ],
-    "firstColumn": [
-      "Use case diagram",
-      "Non-functional requirements",
-      "Functional requirements",
-      "BPMN",
-      "Class diagrams",
-      "Design thinking",
-      "Scrum",
-      "Git",
-      "Node.js",
-      "WebAPI",
-      "MongoDB",
-      "Github actions"
-    ]
+    "firstColumn": []
   },
   "chart": {
+    "dynamicAdditions": {
+      "categories": ["xaxis","categories"],
+      "maxY": ["yaxis","max"]
+    },
     "options": {
       "chart": {
         "type": "bar",
@@ -129,17 +94,7 @@
       },
       "xaxis": {
         "type": "category",
-        "categories": [
-          "Use case diagram",
-          "Non-functional requirements",
-          "Functional requirements",
-          "BPMN",
-          "Class diagrams",
-          "Scrum",
-          "Design thinking",
-          "WebAPI",
-          "MongoDB"
-        ],
+        "categories": [],
         "title": {
           "text": "Topic"
         },
@@ -148,6 +103,7 @@
         }
       },
       "yaxis": {
+        "max": 0,
         "title": {
           "text": "Students"
         }
@@ -181,51 +137,7 @@
         }
       ]
     }
-  },
-  "filters": [
-    {
-      "title": "Topic",
-      "ref": "topic",
-      "dataType": "id",
-      "selected": {
-        "name": "3",
-        "view_name": "Last: BPMN"
-      },
-      "options": [
-        {
-          "name": "3",
-          "view_name": "Last: BPMN",
-          "default": true
-        },
-        {
-          "name": "2",
-          "view_name": "Non-functional requirements",
-          "default": false
-        },
-        {
-          "name": "1",
-          "view_name": "Functional requirements",
-          "default": false
-        }
-      ]
-    },
-    {
-      "title": "Data range",
-      "ref": "dataRange",
-      "dataType": "dataRange",
-      "selected": {
-        "name": "13-09-2021_22-04-2022",
-        "view_name": "This course year"
-      },
-      "options": [
-        {
-          "name": "13-09-2021_22-04-2022",
-          "view_name": "This course year",
-          "default": true
-        }
-      ]
-    }
-  ]
+  }
 },{
   "_id": "2",
   "title": "Learning-Partecipation summary",
@@ -331,22 +243,12 @@
       "",
       "Learning level"
     ],
-    "firstColumn": [
-      "Use case diagram",
-      "Non-functional requirements",
-      "Functional requirements",
-      "BPMN",
-      "Class diagrams",
-      "Design thinking",
-      "Scrum",
-      "Git",
-      "Node.js",
-      "WebAPI",
-      "MongoDB",
-      "Github actions"
-    ]
+    "firstColumn": []
   },
   "chart": {
+    "dynamicAdditions": {
+      "categories": ["xaxis","categories"]
+    },
     "options": {
       "chart": {
         "type": "bar",
@@ -441,22 +343,12 @@
       "",
       "Partecipation level"
     ],
-    "firstColumn": [
-      "Use case diagram",
-      "Non-functional requirements",
-      "Functional requirements",
-      "BPMN",
-      "Class diagrams",
-      "Design thinking",
-      "Scrum",
-      "Git",
-      "Node.js",
-      "WebAPI",
-      "MongoDB",
-      "Github actions"
-    ]
+    "firstColumn": []
   },
   "chart": {
+    "dynamicAdditions": {
+      "categories": ["xaxis","categories"]
+    },
     "options": {
       "chart": {
         "type": "bar",

@@ -12,6 +12,7 @@ const bodyParser = require('body-parser');
 const { env, allowedNodeEnvironmentFlags } = require('process');
 const { Console } = require('console');
 const { response } = require('express');
+const { baseParams } = require('./analyticsDDSP');
 
 const app = express();
 app.use(cors());
@@ -662,9 +663,9 @@ app.post('/addTime', (req, res) => {
     });
   })
 
-  //example    GET /analytics || /analytics?analyticId=1
+  //example    GET /analytics || /analytics?id=1
   app.get("/analytics", (req, res) => {
-    let id = req.query.analyticId;
+    let id = req.query.id;
     if (id == undefined) {
       dbo.collection(config.collNameAnalytics).find({}).toArray(function (err, _res) {
         if (err) throw err;
@@ -682,6 +683,39 @@ app.post('/addTime', (req, res) => {
         })
     }
   })
+
+  app.get("/analyticsData", async (req,res) => {
+    let id = req.query.id;
+    let customData = req.query.customData != undefined ? req.query.customData : false;
+    let params = data = {};
+    let currentParams,toAssign;
+
+    if (!customData && baseParams[id] != undefined) {
+        for (const key of Object.keys(baseParams[id])) {
+            currentParams = baseParams[id][key];
+            for (const param of Object.keys(currentParams.assignments)) {
+                for (const path of currentParams.assignments[param]) {
+                    toAssign = currentParams.query;
+                    const limit = path.length - 1;
+                    for (let i = 0; i < limit; ++i) {
+                        toAssign = toAssign[path[i]] ?? (toAssign[path[i]] = { });
+                    }
+                    toAssign[path[limit]] = req.query[param];
+                }
+            }
+            data[key] = await dbo.collection(currentParams.collection).aggregate(currentParams.query).toArray();
+        }
+    } else {
+        params = req.query;
+        delete params.id;
+        switch (id) {
+            default:
+                console.log("There aren't no data for this analytic");
+                break;
+        }
+    }
+    res.send(data);
+  });
 
   /**
    * Auto convert file using python (XML->JSON)

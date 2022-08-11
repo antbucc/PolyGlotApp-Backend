@@ -81,6 +81,42 @@
   "time": 50,
   "outcome": "NOANSWER"
 },{
+  "playerid": "antbucc77",
+  "question": {
+    "idnumber": "6",
+    "name": "CD6",
+    "topic": "topic-class",
+    "course": "Software Engineering",
+    "type": "multichoice",
+    "difficulty": "Difficulty-1",
+    "questiontext": "<p>A generalization\nrelationship between a subclass and a superclass has the following properties:</p>",
+    "answer": [
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>The subclass must\nnot have more attributes than the superclass.</p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A superclass must\nnot be abstract.</p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A subclass can only\ninherit from one superclass.</p>"
+      },
+      {
+        "fraction": "100",
+        "format": "html",
+        "text": "The subclass inherits\nthe properties of the superclass"
+      }
+    ]
+  },
+  "date": "2022-05-29T16:38:59.553Z",
+  "time": 50,
+  "outcome": "NOANSWER"
+},{
   "playerid": "antbucc10",
   "question": {
     "idnumber": "2",
@@ -161,6 +197,42 @@
   },
   "date": "2022-07-28T12:38:59.553Z",
   "time": 25,
+  "outcome": "NOK"
+},{
+  "playerid": "antbucc10",
+  "question": {
+    "idnumber": "6",
+    "name": "CD6",
+    "topic": "topic-class",
+    "course": "Software Engineering",
+    "type": "multichoice",
+    "difficulty": "Difficulty-1",
+    "questiontext": "<p>A generalization\nrelationship between a subclass and a superclass has the following properties:</p>",
+    "answer": [
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>The subclass must\nnot have more attributes than the superclass.</p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A superclass must\nnot be abstract.</p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A subclass can only\ninherit from one superclass.</p>"
+      },
+      {
+        "fraction": "100",
+        "format": "html",
+        "text": "The subclass inherits\nthe properties of the superclass"
+      }
+    ]
+  },
+  "date": "2022-05-29T15:38:59.553Z",
+  "time": 20,
   "outcome": "NOK"
 },{
   "playerid": "dincau",
@@ -244,6 +316,42 @@
   "date": "2022-07-28T18:38:59.553Z",
   "time": 25,
   "outcome": "OK"
+},{
+  "playerid": "dincau",
+  "question": {
+    "idnumber": "6",
+    "name": "CD6",
+    "topic": "topic-class",
+    "course": "Software Engineering",
+    "type": "multichoice",
+    "difficulty": "Difficulty-1",
+    "questiontext": "<p>A generalization\nrelationship between a subclass and a superclass has the following properties:</p>",
+    "answer": [
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>The subclass must\nnot have more attributes than the superclass.</p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A superclass must\nnot be abstract.</p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A subclass can only\ninherit from one superclass.</p>"
+      },
+      {
+        "fraction": "100",
+        "format": "html",
+        "text": "The subclass inherits\nthe properties of the superclass"
+      }
+    ]
+  },
+  "date": "2022-05-29T12:38:59.553Z",
+  "time": 40,
+  "outcome": "NOK"
 },{
   "playerid": "antbucc5577",
   "question": {
@@ -372,4 +480,40 @@
   "date": "2022-07-28T8:38:59.553Z",
   "time": 25,
   "outcome": "OK"
+},{
+  "playerid": "michela",
+  "question": {
+    "idnumber": "6",
+    "name": "CD6",
+    "topic": "topic-class",
+    "course": "Software Engineering",
+    "type": "multichoice",
+    "difficulty": "Difficulty-1",
+    "questiontext": "<p>A generalization\nrelationship between a subclass and a superclass has the following properties:</p>",
+    "answer": [
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>The subclass must\nnot have more attributes than the superclass.</p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A superclass must\nnot be abstract.</p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A subclass can only\ninherit from one superclass.</p>"
+      },
+      {
+        "fraction": "100",
+        "format": "html",
+        "text": "The subclass inherits\nthe properties of the superclass"
+      }
+    ]
+  },
+  "date": "2022-05-29T17:38:59.553Z",
+  "time": 30,
+  "outcome": "NOK"
 }]
