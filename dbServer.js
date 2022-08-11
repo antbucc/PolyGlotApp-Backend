@@ -684,6 +684,27 @@ app.post('/addTime', (req, res) => {
     }
   })
 
+  function getPathTarget(target, path, strictPath) {
+    let again = true;
+    let i = 0;
+    const limit = path.length - 1;
+    while (again && i < limit) {
+      if (target[path[i]] != undefined) {
+        target = target[path[i]];
+      } else if (strictPath) {
+        again = false;
+      } else {
+        target = target[path[i]] = {};
+      }
+      i++;
+    }
+    if ((again && target[path[limit]] != undefined) || !strictPath) {
+      return target;
+    } else {
+      return null;
+    }
+  }
+
   app.get("/analyticsData", async (req,res) => {
     let id = req.query.id;
     let customData = req.query.customData != undefined ? req.query.customData : false;
@@ -695,12 +716,10 @@ app.post('/addTime', (req, res) => {
             currentParams = baseParams[id][key];
             for (const param of Object.keys(currentParams.assignments)) {
                 for (const path of currentParams.assignments[param]) {
-                    toAssign = currentParams.query;
-                    const limit = path.length - 1;
-                    for (let i = 0; i < limit; ++i) {
-                        toAssign = toAssign[path[i]] ?? (toAssign[path[i]] = { });
+                    toAssign = getPathTarget(currentParams.query,path,true);
+                    if (toAssign != null) {
+                        toAssign[path[path.length - 1]] = req.query[param];
                     }
-                    toAssign[path[limit]] = req.query[param];
                 }
             }
             data[key] = await dbo.collection(currentParams.collection).aggregate(currentParams.query).toArray();
