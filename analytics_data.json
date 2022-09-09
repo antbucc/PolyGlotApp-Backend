@@ -7,15 +7,23 @@
     "teacher"
   ],
   "table": {
-    "head": [],
+    "head": [
+      "Answer",
+      "Percentage"
+    ],
     "firstColumn": [
-      "Correct answer",
-      "Wrong answer",
-      "No answer",
-      "No partecipation"
+      "Correct",
+      "Wrong",
+      "None"
     ]
   },
   "chart": {
+    "functions": [
+      [
+        "dataLabels",
+        "formatter"
+      ]
+    ],
     "options": {
       "chart": {
         "type": "pie"
@@ -23,10 +31,16 @@
       "colors": [
         "#00d88f",
         "#ff6279",
-        "#ffbf42",
-        "#b5b5b5"
+        "#c0c0c0",
+        "#ffbf42"
       ],
       "dataLabels": {
+        "formatter": {
+          "arguments": [
+            "val"
+          ],
+          "body": "return (val % 1 === 0 ? val : val.toFixed(decimals))+'%'"
+        },
         "style": {
           "fontSize": "18px"
         }
@@ -34,13 +48,25 @@
       "labels": [
         "Correct answer",
         "Wrong answer",
-        "No answer",
-        "No partecipation"
+        "No answer"
       ],
-      "tooltip": {
-        "style": {
-          "fontSize": "18px"
+      "legend": {
+        "horizontalAlign": "left"
+      },
+      "states": {
+        "active": {
+          "filter": {
+            "type": "none"
+          }
+        },
+        "hover": {
+          "filter": {
+            "type": "none"
+          }
         }
+      },
+      "tooltip": {
+        "enabled": false
       },
       "responsive": [
         {
@@ -56,7 +82,7 @@
   }
 },{
   "_id": "1",
-  "title": "Topics comparison",
+  "title": "Topic comparison",
   "category": 0,
   "custom": false,
   "permissions": [
@@ -64,33 +90,52 @@
   ],
   "table": {
     "head": [
-      "",
-      "Quizzes",
+      "Topic",
       "Correct answer",
       "Wrong answer",
-      "No answer",
-      "No partecipation"
+      "No answer"
     ],
     "firstColumn": []
   },
   "chart": {
     "dynamicAdditions": {
-      "categories": ["xaxis","categories"],
-      "maxY": ["yaxis","max"]
+      "categories": ["xaxis","categories"]
     },
     "options": {
       "chart": {
         "type": "bar",
         "stacked": true,
+        "stackType": "100%",
         "toolbar": {
           "show": false
         }
       },
+      "colors": [
+        "#00d88f",
+        "#ff6279",
+        "#c0c0c0",
+        "#ffbf42"
+      ],
       "plotOptions": {
         "bar": {
           "horizontal": false,
           "borderRadius": 10
         }
+      },
+      "states": {
+        "active": {
+          "filter": {
+            "type": "none"
+          }
+        },
+        "hover": {
+          "filter": {
+            "type": "none"
+          }
+        }
+      },
+      "tooltip": {
+        "enabled": false
       },
       "xaxis": {
         "type": "category",
@@ -236,12 +281,12 @@
   "category": 0,
   "custom": false,
   "permissions": [
-    "student"
+    "teacher"
   ],
   "table": {
     "head": [
-      "",
-      "Learning level"
+      "Topic",
+      "Learning level (0-5)"
     ],
     "firstColumn": []
   },
@@ -272,20 +317,7 @@
       },
       "xaxis": {
         "type": "category",
-        "categories": [
-          "Use case diagram",
-          "Non-functional requirements",
-          "Functional requirements",
-          "BPMN",
-          "Class diagrams",
-          "Design thinking",
-          "Scrum",
-          "Git",
-          "Node.js",
-          "WebAPI",
-          "MongoDB",
-          "Github actions"
-        ],
+        "categories": [],
         "labels": {
           "trim": true
         },
@@ -336,12 +368,12 @@
   "category": 0,
   "custom": false,
   "permissions": [
-    "student"
+    "teacher"
   ],
   "table": {
     "head": [
-      "",
-      "Partecipation level"
+      "Topic",
+      "Partecipation level (0-5)"
     ],
     "firstColumn": []
   },
@@ -372,20 +404,7 @@
       },
       "xaxis": {
         "type": "category",
-        "categories": [
-          "Use case diagram",
-          "Non-functional requirements",
-          "Functional requirements",
-          "BPMN",
-          "Class diagrams",
-          "Design thinking",
-          "Scrum",
-          "Git",
-          "Node.js",
-          "WebAPI",
-          "MongoDB",
-          "Github actions"
-        ],
+        "categories": [],
         "labels": {
           "trim": true
         },

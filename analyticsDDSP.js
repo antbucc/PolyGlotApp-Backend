@@ -1,16 +1,16 @@
 //Analytics Dynamic Data Search Parameters
 
 const config = require("./local_config");
-let topicOutcomes;
+let topicQuizzes,topicOutcomes;
 
-const baseParams = {
-  "0": {
-    data: {
-      assignments: {
+const serverResearch = {
+  "0": { //Analytic
+    data: { //Query
+      assignments: { //Request's query params and their destinations
         course: [[0,"$match","question.course"]]
       },
-      collection: config.collNameAnswer,
-      query: [
+      collection: config.collNameAnswer, //Collection name
+      query: [ //MongoDB query
         {
           $match: {}
         },
@@ -46,8 +46,8 @@ const baseParams = {
       ]
     }
   },
-  "1": (topicOutcomes = {
-    data: {
+  "1": {
+    data: (topicOutcomes = {
       assignments: {
         course: [
           [0,"$match","question.course"],
@@ -79,11 +79,48 @@ const baseParams = {
           }
         }
       ]
+    })
+  },
+  "4": {
+    data: {
+      assignments: {
+        course: [[0,"$match","question.course"]]
+      },
+      collection: config.collNameAnswer,
+      query: [
+        {
+          $match: {}
+        },
+        {
+          $group: {
+            _id: {
+              questionid: "$question.idnumber",
+              topic: "$question.topic",
+              outcome: "$outcome"
+            },
+            students: { $sum: 1 }
+          }
+        },
+        {
+          $group: {
+            _id: {
+              questionid: "$_id.questionid",
+              topic: "$_id.topic",
+            },
+            outcomes: {
+              $push: {
+                code: "$_id.outcome",
+                students: "$students"
+              }
+            }
+          }
+        }
+      ]
     },
-    topicQuizzes: {
+    topicQuizzes: (topicQuizzes = {
       assignments: {
         course: [
-          [0,"$match","question.course"],
+          [0,"$match","question.course"]
         ]
       },
       collection: config.collNameAnswer,
@@ -106,10 +143,12 @@ const baseParams = {
           }
         }
       ]
-    }
-  }),
-  "4": topicOutcomes,
-  "5": topicOutcomes,
+    })
+  },
+  "5": {
+    data: topicOutcomes,
+    topicQuizzes: topicQuizzes
+  },
 };
 
-module.exports = { baseParams };
+module.exports = { serverResearch };

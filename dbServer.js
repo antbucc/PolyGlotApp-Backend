@@ -12,7 +12,7 @@ const bodyParser = require('body-parser');
 const { env, allowedNodeEnvironmentFlags } = require('process');
 const { Console } = require('console');
 const { response } = require('express');
-const { baseParams } = require('./analyticsDDSP');
+const { serverResearch } = require('./analyticsDDSP');
 
 const app = express();
 app.use(cors());
@@ -624,6 +624,9 @@ app.post('/addTime', (req, res) => {
 
     let token = req.query.token;
     let courseId = req.query.courseid;
+    let category = Number(req.query.category);
+
+    let send = true;
 
     let roles = await getRoles(token,courseId);
     switch (roles) {
@@ -651,16 +654,19 @@ app.post('/addTime', (req, res) => {
                 buildFilters: { $cond: [{ $ifNull: ["$filters", false] }, true, false] }
             }
     }];
-    let category = Number(req.query.category)
-    if (Number.isNaN(category)) {
-      throw new Error("Invalid category");
+    
+    if (category != undefined && Number.isNaN(category)) {
+      res.send([]);
+      send = false;
     } else if (category != undefined) {
       aggregation.push({ $match: { category: category }})
     }
-    dbo.collection(config.collNameAnalytics).aggregate(aggregation).toArray(function (err, _res) {
-      if (err) throw err;
-      res.send(_res);
-    });
+    if (send) {
+        dbo.collection(config.collNameAnalytics).aggregate(aggregation).toArray(function (err, _res) {
+            if (err) throw err;
+            res.send(_res);
+        });
+    }
   })
 
   //example    GET /analytics || /analytics?id=1
@@ -711,11 +717,11 @@ app.post('/addTime', (req, res) => {
     let params = data = {};
     let currentParams,toAssign;
 
-    if (!customData && baseParams[id] != undefined) {
-        for (const key of Object.keys(baseParams[id])) {
-            currentParams = baseParams[id][key];
-            for (const param of Object.keys(currentParams.assignments)) {
-                for (const path of currentParams.assignments[param]) {
+    if (serverResearch[id] != undefined) {
+        for (const key of Object.keys(serverResearch[id])) { //Execute all research
+            currentParams = serverResearch[id][key];
+            for (const param of Object.keys(currentParams.assignments)) { //Assign all request's query params
+                for (const path of currentParams.assignments[param]) { //Put a param in all its destinations
                     toAssign = getPathTarget(currentParams.query,path,true);
                     if (toAssign != null) {
                         toAssign[path[path.length - 1]] = req.query[param];
@@ -724,12 +730,13 @@ app.post('/addTime', (req, res) => {
             }
             data[key] = await dbo.collection(currentParams.collection).aggregate(currentParams.query).toArray();
         }
-    } else {
+    } 
+    if (customData) { //Special data research or server-side edits of the found data
         params = req.query;
         delete params.id;
         switch (id) {
             default:
-                console.log("There aren't no data for this analytic");
+                console.log("There aren't no custom data for this analytic");
                 break;
         }
     }
@@ -893,8 +900,6 @@ app.post('/addTime', (req, res) => {
     insertAnswerFromPOST(response);
 
     res.end(JSON.stringify(response));
-   // res.end("OK");
-
 });
 
 app.get('/answers', (req, res) => {
@@ -906,7 +911,7 @@ app.get('/answers', (req, res) => {
         time: req.query.time,
         outcome: req.query.outcome,
     }
-    let aggregation = [{ $match: {} }];
+    let aggregation = [{ $match: {} },{ $sort: { date: -1 }}];
     for (const key of Object.keys(params)) {
         if (params[key] != undefined) {
             aggregation[0].$match[key] = params[key];
