@@ -619,6 +619,27 @@ app.post('/addTime', (req, res) => {
 
   //******************************************************************************************************************************************* */
 
+  function getPathTarget(target, path, strictPath) {
+    let again = true;
+    let i = 0;
+    const limit = path.length - 1;
+    while (again && i < limit) {
+      if (target[path[i]] != undefined) {
+        target = target[path[i]];
+      } else if (strictPath) {
+        again = false;
+      } else {
+        target = target[path[i]] = {};
+      }
+      i++;
+    }
+    if ((again && target[path[limit]] != undefined) || !strictPath) {
+      return target;
+    } else {
+      return null;
+    }
+  }
+
   //example    GET /analyticsSum
   app.get("/analyticsSum", async (req, res) => {
 
@@ -671,6 +692,9 @@ app.post('/addTime', (req, res) => {
 
   //example    GET /analytics || /analytics?id=1
   app.get("/analytics", (req, res) => {
+    
+    let tmpChart,fn,last;
+
     let id = req.query.id;
     if (id == undefined) {
       dbo.collection(config.collNameAnalytics).find({}).toArray(function (err, _res) {
@@ -680,6 +704,20 @@ app.post('/addTime', (req, res) => {
     } else {
       dbo.collection(config.collNameAnalytics).findOne({ _id: id })
         .then(analytic => {
+          tmpChart = analytic.chart;
+          if (tmpChart.functions != undefined && tmpChart.functions.length) {
+            //Convert functions parameters and body into functions
+            for (const path of tmpChart.functions) {
+              fn = getPathTarget(tmpChart["options"],path,true);
+              if (fn != null) {
+                last = path.length - 1;
+                fn[path[last]] = Function(
+                  fn[path[last]].arguments,
+                  fn[path[last]].body
+                );
+              }
+            }
+          }
           res.send(analytic)
         })
         .catch(err => {
@@ -689,27 +727,6 @@ app.post('/addTime', (req, res) => {
         })
     }
   })
-
-  function getPathTarget(target, path, strictPath) {
-    let again = true;
-    let i = 0;
-    const limit = path.length - 1;
-    while (again && i < limit) {
-      if (target[path[i]] != undefined) {
-        target = target[path[i]];
-      } else if (strictPath) {
-        again = false;
-      } else {
-        target = target[path[i]] = {};
-      }
-      i++;
-    }
-    if ((again && target[path[limit]] != undefined) || !strictPath) {
-      return target;
-    } else {
-      return null;
-    }
-  }
 
   app.get("/analyticsData", async (req,res) => {
     let id = req.query.id;

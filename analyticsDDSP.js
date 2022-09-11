@@ -12,7 +12,7 @@ const serverResearch = {
       collection: config.collNameAnswer, //Collection name
       query: [ //MongoDB query
         {
-          $match: {}
+          $match: { "question.course": "" }
         },
         {
           $group: {
@@ -56,7 +56,7 @@ const serverResearch = {
       collection: config.collNameAnswer,
       query: [
         {
-          $match: {}
+          $match: { "question.course": "" }
         },
         {
           $group: {
@@ -89,7 +89,7 @@ const serverResearch = {
       collection: config.collNameAnswer,
       query: [
         {
-          $match: {}
+          $match: { "question.course": "" }
         },
         {
           $group: {
@@ -126,7 +126,7 @@ const serverResearch = {
       collection: config.collNameAnswer,
       query: [
         {
-          $match: {}
+          $match: { "question.course": "" }
         },
         {
           $group: {
