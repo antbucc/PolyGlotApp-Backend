@@ -672,7 +672,7 @@ app.post('/addTime', (req, res) => {
                 custom: 1,
                 "chart.options.chart.type": { $ifNull: ["$chart.options.chart.type", ""] },
                 buildTable: { $cond: [{ $ifNull: ["$table", false] }, true, false] },
-                buildFilters: { $cond: [{ $ifNull: ["$filters", false] }, true, false] }
+                /*buildFilters: { $cond: [{ $ifNull: ["$filters", false] }, true, false] }*/
             }
     }];
     
@@ -705,7 +705,7 @@ app.post('/addTime', (req, res) => {
       dbo.collection(config.collNameAnalytics).findOne({ _id: id })
         .then(analytic => {
           tmpChart = analytic.chart;
-          if (tmpChart.functions != undefined && tmpChart.functions.length) {
+          if (tmpChart != undefined && tmpChart.functions != undefined && tmpChart.functions.length) {
             //Convert functions parameters and body into functions
             for (const path of tmpChart.functions) {
               fn = getPathTarget(tmpChart["options"],path,true);
