@@ -791,7 +791,7 @@ app.post('/addTime', (req, res) => {
  
   /**
    * 
-   * @param {*} file JSON con tutti query Answer da inserire in mongodb
+   * @param {*} file JSON con query Answer da inserire in mongodb
    */
    function insertAnswerFromPOST(file){
     console.log(file);
@@ -807,7 +807,6 @@ app.post('/addTime', (req, res) => {
          });
       }
       });
-
   }
 
 // /saveAnswer?playerId=11111&questionid=222222&course=SE&date=DATAA&time=TIME&outcome=OK
@@ -856,7 +855,8 @@ app.get('/answers', (req, res) => {
 app.post('/insertFromMoodle',(req, res) => {
 
     console.log("insertFromMoodle API INVOKED");
-
+    let timestamp = new Date();
+    console.log(req.body);
     let response = {  
         idnumber:req.body.idnumber,
         type:req.body.type,
@@ -868,12 +868,32 @@ app.post('/insertFromMoodle',(req, res) => {
         incorrectfeedback:req.body.incorrectfeedback,
         difficulty:req.body.difficulty,
         topic:req.body.topic,
-        course:req.body.course
-    }; 
-    console.log(response);
+        course:req.body.course,
+        timestamp:timestamp
+    };
+
+    //console.log(response);
     res.end("OK");
 
 });
+  /**
+   * 
+   * @param {*} file JSON con query da inserire in mongodb
+   */
+   function insertQuestionFromMoodle(file){
+    console.log(file);
+    console.log("INSERT QUESTION IN MONGODB");
+    dbo.collection(config.collNameQuizes).find({idnumber:file.idnumber,course:file.course}).toArray(function(err, res) {
+        if (err) throw err;
+        if(res.length>0){
+          console.log("La domanda: "+file.idnumber + " esiste già!"); 
+        }else{
+          dbo.collection(config.collNameQuizes).insertOne(file, function(err, res) {
+            if (err) throw err;
+          });
+        }
+        }); 
+  }
 /******************************************************************** */
   app.listen(port, () => {
     console.log(`PolyGlot App listening on port ${port}!`)
