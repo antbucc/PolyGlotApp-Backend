@@ -7,15 +7,23 @@
     "teacher"
   ],
   "table": {
-    "head": [],
+    "head": [
+      "Answer",
+      "Percentage"
+    ],
     "firstColumn": [
-      "Correct answer",
-      "Wrong answer",
-      "No answer",
-      "No partecipation"
+      "Correct",
+      "Wrong",
+      "None"
     ]
   },
   "chart": {
+    "functions": [
+      [
+        "dataLabels",
+        "formatter"
+      ]
+    ],
     "options": {
       "chart": {
         "type": "pie"
@@ -23,10 +31,16 @@
       "colors": [
         "#00d88f",
         "#ff6279",
-        "#ffbf42",
-        "#b5b5b5"
+        "#c0c0c0",
+        "#ffbf42"
       ],
       "dataLabels": {
+        "formatter": {
+          "arguments": [
+            "val"
+          ],
+          "body": "return (val % 1 === 0 ? val : val.toFixed(decimals))+'%'"
+        },
         "style": {
           "fontSize": "18px"
         }
@@ -34,13 +48,25 @@
       "labels": [
         "Correct answer",
         "Wrong answer",
-        "No answer",
-        "No partecipation"
+        "No answer"
       ],
-      "tooltip": {
-        "style": {
-          "fontSize": "18px"
+      "legend": {
+        "horizontalAlign": "left"
+      },
+      "states": {
+        "active": {
+          "filter": {
+            "type": "none"
+          }
+        },
+        "hover": {
+          "filter": {
+            "type": "none"
+          }
         }
+      },
+      "tooltip": {
+        "enabled": false
       },
       "responsive": [
         {
@@ -53,38 +79,10 @@
         }
       ]
     }
-  },
-  "filters": [
-    {
-      "title": "Quiz",
-      "ref": "quiz",
-      "dataType": "id",
-      "selected": {
-        "name": "3",
-        "view_name": "Last: BPMN"
-      },
-      "options": [
-        {
-          "name": "3",
-          "view_name": "Last: BPMN",
-          "default": true
-        },
-        {
-          "name": "2",
-          "view_name": "Non-functional requirements",
-          "default": false
-        },
-        {
-          "name": "1",
-          "view_name": "Functional requirements",
-          "default": false
-        }
-      ]
-    }
-  ]
+  }
 },{
   "_id": "1",
-  "title": "Quiz comparison by topic",
+  "title": "Topic comparison",
   "category": 0,
   "custom": false,
   "permissions": [
@@ -92,54 +90,56 @@
   ],
   "table": {
     "head": [
-      "",
+      "Topic",
       "Correct answer",
       "Wrong answer",
       "No answer"
     ],
-    "firstColumn": [
-      "Use case diagram",
-      "Non-functional requirements",
-      "Functional requirements",
-      "BPMN",
-      "Class diagrams",
-      "Design thinking",
-      "Scrum",
-      "Git",
-      "Node.js",
-      "WebAPI",
-      "MongoDB",
-      "Github actions"
-    ]
+    "firstColumn": []
   },
   "chart": {
+    "dynamicAdditions": {
+      "categories": ["xaxis","categories"]
+    },
     "options": {
       "chart": {
         "type": "bar",
         "stacked": true,
+        "stackType": "100%",
         "toolbar": {
           "show": false
         }
       },
+      "colors": [
+        "#00d88f",
+        "#ff6279",
+        "#c0c0c0",
+        "#ffbf42"
+      ],
       "plotOptions": {
         "bar": {
           "horizontal": false,
           "borderRadius": 10
         }
       },
+      "states": {
+        "active": {
+          "filter": {
+            "type": "none"
+          }
+        },
+        "hover": {
+          "filter": {
+            "type": "none"
+          }
+        }
+      },
+      "tooltip": {
+        "enabled": false
+      },
       "xaxis": {
         "type": "category",
-        "categories": [
-          "Use case diagram",
-          "Non-functional requirements",
-          "Functional requirements",
-          "BPMN",
-          "Class diagrams",
-          "Scrum",
-          "Design thinking",
-          "WebAPI",
-          "MongoDB"
-        ],
+        "categories": [],
         "title": {
           "text": "Topic"
         },
@@ -148,6 +148,7 @@
         }
       },
       "yaxis": {
+        "max": 0,
         "title": {
           "text": "Students"
         }
@@ -181,51 +182,7 @@
         }
       ]
     }
-  },
-  "filters": [
-    {
-      "title": "Topic",
-      "ref": "topic",
-      "dataType": "id",
-      "selected": {
-        "name": "3",
-        "view_name": "Last: BPMN"
-      },
-      "options": [
-        {
-          "name": "3",
-          "view_name": "Last: BPMN",
-          "default": true
-        },
-        {
-          "name": "2",
-          "view_name": "Non-functional requirements",
-          "default": false
-        },
-        {
-          "name": "1",
-          "view_name": "Functional requirements",
-          "default": false
-        }
-      ]
-    },
-    {
-      "title": "Data range",
-      "ref": "dataRange",
-      "dataType": "dataRange",
-      "selected": {
-        "name": "13-09-2021_22-04-2022",
-        "view_name": "This course year"
-      },
-      "options": [
-        {
-          "name": "13-09-2021_22-04-2022",
-          "view_name": "This course year",
-          "default": true
-        }
-      ]
-    }
-  ]
+  }
 },{
   "_id": "2",
   "title": "Learning-Partecipation summary",
@@ -324,29 +281,19 @@
   "category": 0,
   "custom": false,
   "permissions": [
-    "student"
+    "teacher"
   ],
   "table": {
     "head": [
-      "",
-      "Learning level"
+      "Topic",
+      "Learning level (0-5)"
     ],
-    "firstColumn": [
-      "Use case diagram",
-      "Non-functional requirements",
-      "Functional requirements",
-      "BPMN",
-      "Class diagrams",
-      "Design thinking",
-      "Scrum",
-      "Git",
-      "Node.js",
-      "WebAPI",
-      "MongoDB",
-      "Github actions"
-    ]
+    "firstColumn": []
   },
   "chart": {
+    "dynamicAdditions": {
+      "categories": ["xaxis","categories"]
+    },
     "options": {
       "chart": {
         "type": "bar",
@@ -370,20 +317,7 @@
       },
       "xaxis": {
         "type": "category",
-        "categories": [
-          "Use case diagram",
-          "Non-functional requirements",
-          "Functional requirements",
-          "BPMN",
-          "Class diagrams",
-          "Design thinking",
-          "Scrum",
-          "Git",
-          "Node.js",
-          "WebAPI",
-          "MongoDB",
-          "Github actions"
-        ],
+        "categories": [],
         "labels": {
           "trim": true
         },
@@ -434,29 +368,19 @@
   "category": 0,
   "custom": false,
   "permissions": [
-    "student"
+    "teacher"
   ],
   "table": {
     "head": [
-      "",
-      "Partecipation level"
+      "Topic",
+      "Partecipation level (0-5)"
     ],
-    "firstColumn": [
-      "Use case diagram",
-      "Non-functional requirements",
-      "Functional requirements",
-      "BPMN",
-      "Class diagrams",
-      "Design thinking",
-      "Scrum",
-      "Git",
-      "Node.js",
-      "WebAPI",
-      "MongoDB",
-      "Github actions"
-    ]
+    "firstColumn": []
   },
   "chart": {
+    "dynamicAdditions": {
+      "categories": ["xaxis","categories"]
+    },
     "options": {
       "chart": {
         "type": "bar",
@@ -480,20 +404,7 @@
       },
       "xaxis": {
         "type": "category",
-        "categories": [
-          "Use case diagram",
-          "Non-functional requirements",
-          "Functional requirements",
-          "BPMN",
-          "Class diagrams",
-          "Design thinking",
-          "Scrum",
-          "Git",
-          "Node.js",
-          "WebAPI",
-          "MongoDB",
-          "Github actions"
-        ],
+        "categories": [],
         "labels": {
           "trim": true
         },

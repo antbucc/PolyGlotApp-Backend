@@ -1,91 +1,519 @@
 [{
-  "_id": {
-    "$oid": "62e25ff6d72d37a24f431a9d"
+  "playerid": "antbucc77",
+  "question": {
+    "idnumber": "2",
+    "name": "BPMN correctness",
+    "topic": "BPMN",
+    "course": "Software Engineering",
+    "type": "multichoice",
+    "difficulty": "difficulty-3",
+    "questiontext": "<p>Which of the\nfollowing statements are true</p>",
+    "answer": [
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A role name is noted\nin the upper left corner of a class symbol.</p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A class must never\nhave a relationship with itself.</p>"
+      },
+      {
+        "fraction": "50",
+        "format": "html",
+        "text": "If an object can only\nhave one out of several associations, this may be modeled with a&nbsp;<tt>{xor}</tt>&nbsp;relationship"
+      },
+      {
+        "fraction": "50",
+        "format": "html",
+        "text": "<p>You can specify the\nnames of the roles the classes play in the relationship on the association\nends</p>"
+      }
+    ]
   },
-  "questionid": "2",
-  "course": "Software Engineering",
   "date": "2022-02-25T16:38:59.553Z",
   "time": 25,
-  "outcome": "OK",
-  "playerid": "antbucc77"
+  "outcome": "OK"
 },{
-  "_id": {
-    "$oid": "62e25ff6d72d37a24f431a9e"
+  "playerid": "antbucc77",
+  "question": {
+    "idnumber": "8",
+    "name": "CD8",
+    "topic": "topic-class",
+    "course": "Software Engineering",
+    "type": "multichoice",
+    "difficulty": "difficulty-5",
+    "questiontext": "<p dir=\"ltr\" style=\"text-align: left;\"></p><p>Which visibilities\ncan attributes and operations of classes have?</p>\n\n<p><br></p><br><p></p>",
+    "answer": [
+      {
+        "fraction": "25",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">Public<br></p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">All</p>"
+      },
+      {
+        "fraction": "25",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">package<br></p>"
+      },
+      {
+        "fraction": "25",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">protected<br></p>"
+      },
+      {
+        "fraction": "25",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">private<br></p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">friends</p>"
+      }
+    ]
   },
-  "questionid": "8",
-  "course": "Software Engineering",
   "date": "2022-07-28T16:38:59.553Z",
   "time": 50,
-  "outcome": "NOANSWER",
-  "playerid": "antbucc77"
+  "outcome": "NOANSWER"
 },{
-  "_id": {
-    "$oid": "62e55bc64d30c9895b271cf8"
+  "playerid": "antbucc77",
+  "question": {
+    "idnumber": "6",
+    "name": "CD6",
+    "topic": "topic-class",
+    "course": "Software Engineering",
+    "type": "multichoice",
+    "difficulty": "Difficulty-1",
+    "questiontext": "<p>A generalization\nrelationship between a subclass and a superclass has the following properties:</p>",
+    "answer": [
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>The subclass must\nnot have more attributes than the superclass.</p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A superclass must\nnot be abstract.</p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A subclass can only\ninherit from one superclass.</p>"
+      },
+      {
+        "fraction": "100",
+        "format": "html",
+        "text": "The subclass inherits\nthe properties of the superclass"
+      }
+    ]
   },
-  "questionid": "2",
-  "course": "Software Engineering",
+  "date": "2022-05-29T16:38:59.553Z",
+  "time": 50,
+  "outcome": "NOANSWER"
+},{
+  "playerid": "antbucc10",
+  "question": {
+    "idnumber": "2",
+    "name": "BPMN correctness",
+    "topic": "BPMN",
+    "course": "Software Engineering",
+    "type": "multichoice",
+    "difficulty": "difficulty-3",
+    "questiontext": "<p>Which of the\nfollowing statements are true</p>",
+    "answer": [
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A role name is noted\nin the upper left corner of a class symbol.</p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A class must never\nhave a relationship with itself.</p>"
+      },
+      {
+        "fraction": "50",
+        "format": "html",
+        "text": "If an object can only\nhave one out of several associations, this may be modeled with a&nbsp;<tt>{xor}</tt>&nbsp;relationship"
+      },
+      {
+        "fraction": "50",
+        "format": "html",
+        "text": "<p>You can specify the\nnames of the roles the classes play in the relationship on the association\nends</p>"
+      }
+    ]
+  },
   "date": "2022-02-25T14:38:59.553Z",
   "time": 20,
-  "outcome": "OK",
-  "playerid": "antbucc10"
+  "outcome": "OK"
 },{
-  "_id": {
-    "$oid": "62e55bc64d30c9895b271cf9"
+  "playerid": "antbucc10",
+  "question": {
+    "idnumber": "8",
+    "name": "CD8",
+    "topic": "topic-class",
+    "course": "Software Engineering",
+    "type": "multichoice",
+    "difficulty": "difficulty-5",
+    "questiontext": "<p dir=\"ltr\" style=\"text-align: left;\"></p><p>Which visibilities\ncan attributes and operations of classes have?</p>\n\n<p><br></p><br><p></p>",
+    "answer": [
+      {
+        "fraction": "25",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">Public<br></p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">All</p>"
+      },
+      {
+        "fraction": "25",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">package<br></p>"
+      },
+      {
+        "fraction": "25",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">protected<br></p>"
+      },
+      {
+        "fraction": "25",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">private<br></p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">friends</p>"
+      }
+    ]
   },
-  "questionid": "8",
-  "course": "Software Engineering",
   "date": "2022-07-28T12:38:59.553Z",
   "time": 25,
-  "outcome": "NOK",
-  "playerid": "antbucc10"
+  "outcome": "NOK"
 },{
-  "_id": {
-    "$oid": "62e55bc64d30c9895b271cfa"
+  "playerid": "antbucc10",
+  "question": {
+    "idnumber": "6",
+    "name": "CD6",
+    "topic": "topic-class",
+    "course": "Software Engineering",
+    "type": "multichoice",
+    "difficulty": "Difficulty-1",
+    "questiontext": "<p>A generalization\nrelationship between a subclass and a superclass has the following properties:</p>",
+    "answer": [
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>The subclass must\nnot have more attributes than the superclass.</p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A superclass must\nnot be abstract.</p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A subclass can only\ninherit from one superclass.</p>"
+      },
+      {
+        "fraction": "100",
+        "format": "html",
+        "text": "The subclass inherits\nthe properties of the superclass"
+      }
+    ]
   },
-  "questionid": "2",
-  "course": "Software Engineering",
+  "date": "2022-05-29T15:38:59.553Z",
+  "time": 20,
+  "outcome": "NOK"
+},{
+  "playerid": "dincau",
+  "question": {
+    "idnumber": "2",
+    "name": "BPMN correctness",
+    "topic": "BPMN",
+    "course": "Software Engineering",
+    "type": "multichoice",
+    "difficulty": "difficulty-3",
+    "questiontext": "<p>Which of the\nfollowing statements are true</p>",
+    "answer": [
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A role name is noted\nin the upper left corner of a class symbol.</p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A class must never\nhave a relationship with itself.</p>"
+      },
+      {
+        "fraction": "50",
+        "format": "html",
+        "text": "If an object can only\nhave one out of several associations, this may be modeled with a&nbsp;<tt>{xor}</tt>&nbsp;relationship"
+      },
+      {
+        "fraction": "50",
+        "format": "html",
+        "text": "<p>You can specify the\nnames of the roles the classes play in the relationship on the association\nends</p>"
+      }
+    ]
+  },
   "date": "2022-02-25T12:38:59.553Z",
   "time": 20,
-  "outcome": "NOK",
-  "playerid": "dincau"
+  "outcome": "NOK"
 },{
-  "_id": {
-    "$oid": "62e55bc64d30c9895b271cfb"
+  "playerid": "dincau",
+  "question": {
+    "idnumber": "8",
+    "name": "CD8",
+    "topic": "topic-class",
+    "course": "Software Engineering",
+    "type": "multichoice",
+    "difficulty": "difficulty-5",
+    "questiontext": "<p dir=\"ltr\" style=\"text-align: left;\"></p><p>Which visibilities\ncan attributes and operations of classes have?</p>\n\n<p><br></p><br><p></p>",
+    "answer": [
+      {
+        "fraction": "25",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">Public<br></p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">All</p>"
+      },
+      {
+        "fraction": "25",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">package<br></p>"
+      },
+      {
+        "fraction": "25",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">protected<br></p>"
+      },
+      {
+        "fraction": "25",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">private<br></p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">friends</p>"
+      }
+    ]
   },
-  "questionid": "8",
-  "course": "Software Engineering",
   "date": "2022-07-28T18:38:59.553Z",
   "time": 25,
-  "outcome": "OK",
-  "playerid": "dincau"
+  "outcome": "OK"
 },{
-  "_id": {
-    "$oid": "62e55bc64d30c9895b271cfd"
+  "playerid": "dincau",
+  "question": {
+    "idnumber": "6",
+    "name": "CD6",
+    "topic": "topic-class",
+    "course": "Software Engineering",
+    "type": "multichoice",
+    "difficulty": "Difficulty-1",
+    "questiontext": "<p>A generalization\nrelationship between a subclass and a superclass has the following properties:</p>",
+    "answer": [
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>The subclass must\nnot have more attributes than the superclass.</p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A superclass must\nnot be abstract.</p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A subclass can only\ninherit from one superclass.</p>"
+      },
+      {
+        "fraction": "100",
+        "format": "html",
+        "text": "The subclass inherits\nthe properties of the superclass"
+      }
+    ]
   },
-  "questionid": "8",
-  "course": "Software Engineering",
+  "date": "2022-05-29T12:38:59.553Z",
+  "time": 40,
+  "outcome": "NOK"
+},{
+  "playerid": "antbucc5577",
+  "question": {
+    "idnumber": "8",
+    "name": "CD8",
+    "topic": "topic-class",
+    "course": "Software Engineering",
+    "type": "multichoice",
+    "difficulty": "difficulty-5",
+    "questiontext": "<p dir=\"ltr\" style=\"text-align: left;\"></p><p>Which visibilities\ncan attributes and operations of classes have?</p>\n\n<p><br></p><br><p></p>",
+    "answer": [
+      {
+        "fraction": "25",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">Public<br></p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">All</p>"
+      },
+      {
+        "fraction": "25",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">package<br></p>"
+      },
+      {
+        "fraction": "25",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">protected<br></p>"
+      },
+      {
+        "fraction": "25",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">private<br></p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">friends</p>"
+      }
+    ]
+  },
   "date": "2022-07-28T9:38:59.553Z",
   "time": 25,
-  "outcome": "NOK",
-  "playerid": "antbucc5577"
+  "outcome": "NOK"
 },{
-  "_id": {
-    "$oid": "62e55bc64d30c9895b271cfe"
+  "playerid": "michela",
+  "question": {
+    "idnumber": "2",
+    "name": "BPMN correctness",
+    "topic": "BPMN",
+    "course": "Software Engineering",
+    "type": "multichoice",
+    "difficulty": "difficulty-3",
+    "questiontext": "<p>Which of the\nfollowing statements are true</p>",
+    "answer": [
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A role name is noted\nin the upper left corner of a class symbol.</p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A class must never\nhave a relationship with itself.</p>"
+      },
+      {
+        "fraction": "50",
+        "format": "html",
+        "text": "If an object can only\nhave one out of several associations, this may be modeled with a&nbsp;<tt>{xor}</tt>&nbsp;relationship"
+      },
+      {
+        "fraction": "50",
+        "format": "html",
+        "text": "<p>You can specify the\nnames of the roles the classes play in the relationship on the association\nends</p>"
+      }
+    ]
   },
-  "questionid": "2",
-  "course": "Software Engineering",
   "date": "2022-02-25T8:38:59.553Z",
   "time": 20,
-  "outcome": "OK",
-  "playerid": "michela"
+  "outcome": "OK"
 },{
-  "_id": {
-    "$oid": "62e55bc64d30c9895b271cff"
+  "playerid": "michela",
+  "question": {
+    "idnumber": "8",
+    "name": "CD8",
+    "topic": "topic-class",
+    "course": "Software Engineering",
+    "type": "multichoice",
+    "difficulty": "difficulty-5",
+    "questiontext": "<p dir=\"ltr\" style=\"text-align: left;\"></p><p>Which visibilities\ncan attributes and operations of classes have?</p>\n\n<p><br></p><br><p></p>",
+    "answer": [
+      {
+        "fraction": "25",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">Public<br></p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">All</p>"
+      },
+      {
+        "fraction": "25",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">package<br></p>"
+      },
+      {
+        "fraction": "25",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">protected<br></p>"
+      },
+      {
+        "fraction": "25",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">private<br></p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p dir=\"ltr\" style=\"text-align: left;\">friends</p>"
+      }
+    ]
   },
-  "questionid": "8",
-  "course": "Software Engineering",
   "date": "2022-07-28T8:38:59.553Z",
   "time": 25,
-  "outcome": "OK",
-  "playerid": "michela"
+  "outcome": "OK"
+},{
+  "playerid": "michela",
+  "question": {
+    "idnumber": "6",
+    "name": "CD6",
+    "topic": "topic-class",
+    "course": "Software Engineering",
+    "type": "multichoice",
+    "difficulty": "Difficulty-1",
+    "questiontext": "<p>A generalization\nrelationship between a subclass and a superclass has the following properties:</p>",
+    "answer": [
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>The subclass must\nnot have more attributes than the superclass.</p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A superclass must\nnot be abstract.</p>"
+      },
+      {
+        "fraction": "0",
+        "format": "html",
+        "text": "<p>A subclass can only\ninherit from one superclass.</p>"
+      },
+      {
+        "fraction": "100",
+        "format": "html",
+        "text": "The subclass inherits\nthe properties of the superclass"
+      }
+    ]
+  },
+  "date": "2022-05-29T17:38:59.553Z",
+  "time": 30,
+  "outcome": "NOK"
 }]
