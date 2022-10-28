@@ -945,23 +945,28 @@ app.post('/insertFromMoodle',(req, res) => {
 
     console.log("insertFromMoodle API INVOKED");
     let timestamp = new Date();
-    console.log(req.body);
+    
+    let newData=Object.keys(req.body)[0];
+    newData= JSON.parse(newData);
+    console.log(newData.name);
+
     let response = {  
-        idnumber:req.body.idnumber,
-        type:req.body.type,
-        name:req.body.name,
-        questiontext:req.body.questiontext,
-        generalfeedback:req.body.generalfeedback,
-        correctfeedback:req.body.correctfeedback,
-        partiallycorrectfeedback:req.body.partiallycorrectfeedback,
-        incorrectfeedback:req.body.incorrectfeedback,
-        difficulty:req.body.difficulty,
-        topic:req.body.topic,
-        course:req.body.course,
+        idnumber:newData.id,
+        type:newData.type,
+        name:newData.name,
+        questiontext:newData.questiontext,
+        generalfeedback:newData.generalfeedback,
+        correctfeedback:newData.correctfeedback,
+        partiallycorrectfeedback:newData.partiallycorrectfeedback,
+        incorrectfeedback:newData.incorrectfeedback,
+        difficulty:newData.difficulty,
+        topic:newData.topic,
+        course:newData.corso,
         timestamp:timestamp
     };
 
-    //console.log(response);
+    console.log(response);
+    insertQuestionFromMoodle(response);
     res.end("OK");
 
 });
