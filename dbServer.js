@@ -961,12 +961,12 @@ app.post('/insertFromMoodle',(req, res) => {
         incorrectfeedback:newData.incorrectfeedback,
         difficulty:newData.difficulty,
         topic:newData.topic,
-        course:newData.corso,
+        course:"Corso-SE",//newData.corso,
         timestamp:timestamp
     };
 
     console.log(response);
-    insertQuestionFromMoodle(response);
+    insertQuestionFromMoodleTEST(response);
     res.end("OK");
 
 });
@@ -988,7 +988,45 @@ app.post('/insertFromMoodle',(req, res) => {
         }
         }); 
   }
-/******************************************************************** */
+
+  /**
+   * 
+   * @param {*} file JSON con query da inserire in mongodb
+   */
+   function insertQuestionFromMoodleTEST(file){
+    console.log(file);
+    let max=0;
+    console.log("---------------------------------------------------------------------------");
+    dbo.collection(config.collNameQuizes).find({course:file.course}).toArray(function(err, res) {
+        if (err) throw err;
+        if(res.length>0){
+            console.log(res);
+            console.log("**********************************************************************************************");
+            res.forEach(element => {
+                if(parseInt(element.idnumber)>max){
+                    max=parseInt(element.idnumber);
+                }
+            });
+            console.log("numeberMAX "+ max);
+        }
+        max=max+1;
+        console.log("NEXT->" +max);
+        file.idnumber=max;
+        dbo.collection(config.collNameQuizes).find({idnumber:file.idnumber,course:file.course}).toArray(function(err, res) {
+            if (err) throw err;
+            if(res.length>0){
+              console.log("La domanda: "+file.idnumber + " esiste già!"); 
+            }else{
+              dbo.collection(config.collNameQuizes).insertOne(file, function(err, res) {
+                console.log("INSERITO");
+                if (err) throw err;
+              });
+            }
+            });
+
+        }); 
+  }
+/*********************************************************************/
   app.listen(port, () => {
     console.log(`PolyGlot App listening on port ${port}!`)
   })
