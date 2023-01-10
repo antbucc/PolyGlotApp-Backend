@@ -47,10 +47,25 @@ MongoClient.connect(url, function(err, db) {
 
   app.get('/questions', (req, res) => {
     let c=req.query.course;
+    //let c=req.query.topic;
+    let createarr= [];
+    var _a_tr= new Object();
+
+
     let qz = req.query.quizzes;
+    //let aggregation = qz == undefined ? [{ $match: { topic:c } }] : [{ $match: { topic:c, idnumber: { $in: qz.split(",") } } }];
     let aggregation = qz == undefined ? [{ $match: { course:c } }] : [{ $match: { course:c, idnumber: { $in: qz.split(",") } } }];
+
     dbo.collection(config.collNameQuizes).aggregate(aggregation).toArray(function(err, _res) {
         if (err) throw err;
+       /* _res.forEach(element => {
+            _a_tr.topic = element.topic;
+            _a_tr.questiontext = element.questiontext;
+            let m=JSON.stringify(_a_tr);
+            createarr.push(JSON.parse(m));
+        });
+        res.send(createarr);*/
+        _res.sort();
         res.send(_res);
     });
   });
@@ -791,7 +806,7 @@ app.post('/addTime', (req, res) => {
  
   /**
    * 
-   * @param {*} file JSON con tutti query Answer da inserire in mongodb
+   * @param {*} file JSON con query Answer da inserire in mongodb
    */
    function insertAnswerFromPOST(file){
     console.log(file);
@@ -807,7 +822,6 @@ app.post('/addTime', (req, res) => {
          });
       }
       });
-
   }
 
 // /saveAnswer?playerId=11111&questionid=222222&course=SE&date=DATAA&time=TIME&outcome=OK
@@ -856,24 +870,51 @@ app.get('/answers', (req, res) => {
 app.post('/insertFromMoodle',(req, res) => {
 
     console.log("insertFromMoodle API INVOKED");
+    let timestamp = new Date();
+    //console.log(req.body);
+    let json_quest = Object.keys(req.body);
+    let j_quest = JSON.parse(json_quest[0]);
+    //console.log(j_quest);
 
     let response = {  
-        idnumber:req.body.idnumber,
-        type:req.body.type,
-        name:req.body.name,
-        questiontext:req.body.questiontext,
-        generalfeedback:req.body.generalfeedback,
-        correctfeedback:req.body.correctfeedback,
-        partiallycorrectfeedback:req.body.partiallycorrectfeedback,
-        incorrectfeedback:req.body.incorrectfeedback,
-        difficulty:req.body.difficulty,
-        topic:req.body.topic,
-        course:req.body.course
-    }; 
+        //idnumber:req.body.idnumber,
+        idnumber:j_quest.id,
+        type:j_quest.type,
+        name:j_quest.name,
+        questiontext:j_quest.questiontext,
+        generalfeedback:j_quest.generalfeedback,
+        correctfeedback:j_quest.correctfeedback,
+        partiallycorrectfeedback:j_quest.partiallycorrectfeedback,
+        incorrectfeedback:j_quest.incorrectfeedback,
+        difficulty:j_quest.difficulty,
+        topic:j_quest.topic,
+        course:j_quest.corso,
+        timestamp:timestamp
+    };
+
     console.log(response);
+    insertQuestionFromMoodle(response);
     res.end("OK");
 
 });
+  /**
+   * 
+   * @param {*} file JSON con query da inserire in mongodb
+   */
+   function insertQuestionFromMoodle(file){
+    console.log(file);
+    console.log("INSERT QUESTION IN MONGODB");
+    dbo.collection(config.collNameQuizes).find({idnumber:file.idnumber,course:file.course}).toArray(function(err, res) {
+        if (err) throw err;
+        if(res.length>0){
+          console.log("La domanda: "+file.idnumber + " esiste già!"); 
+        }else{
+          dbo.collection(config.collNameQuizes).insertOne(file, function(err, res) {
+            if (err) throw err;
+          });
+        }
+        }); 
+  }
 /******************************************************************** */
   app.listen(port, () => {
     console.log(`PolyGlot App listening on port ${port}!`)
