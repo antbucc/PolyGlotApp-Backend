@@ -31,10 +31,15 @@ v16.15.0
 npm install mongodb
 ```
 
-### Tables to create in the database before starting the server
+### Collection to create in the database before starting the server
 
-- quiz (for data import `quiz_data.json`)
-- analytics (for data import `analytics_data.json`)
-- answers (for data import `answers_data.json`)
-
-
+- quiz (data taken from `quiz_data.json`):
+> - Create "quiz" collection on db
+> - Make a POST /insert call to the server
+> - Temporary action: edit the course property in the collection to uniform the courses name with those used in the app (es. Corso-SE -> Software Engineering)
+- analytics (data taken from `analytics_data.json`):
+> - Create "analytics" collection on db
+> - Add data from file
+- answers (data taken from `answers_data.json`)
+> - Create "answers" collection on db
+> - Add data from file

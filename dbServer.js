@@ -12,6 +12,7 @@ const bodyParser = require('body-parser');
 const { env, allowedNodeEnvironmentFlags } = require('process');
 const { Console } = require('console');
 const { response } = require('express');
+const { serverResearch } = require('./analyticsDDSP');
 
 const app = express();
 app.use(cors());
@@ -73,7 +74,7 @@ MongoClient.connect(url, function(err, db) {
   app.get('/insert', (req, res) => {
     console.log("/insert");
     //autoConvertXML();
-    insertFromXML('./json_data.json');
+    insertFromXML('./quiz_data.json');
     res.send("{totalQuest:X, totalInsert: Y}");
   })
 
@@ -633,11 +634,35 @@ app.post('/addTime', (req, res) => {
 
   //******************************************************************************************************************************************* */
 
+  function getPathTarget(target, path, strictPath) {
+    let again = true;
+    let i = 0;
+    const limit = path.length - 1;
+    while (again && i < limit) {
+      if (target[path[i]] != undefined) {
+        target = target[path[i]];
+      } else if (strictPath) {
+        again = false;
+      } else {
+        target = target[path[i]] = {};
+      }
+      i++;
+    }
+    if ((again && target[path[limit]] != undefined) || !strictPath) {
+      return target;
+    } else {
+      return null;
+    }
+  }
+
   //example    GET /analyticsSum
   app.get("/analyticsSum", async (req, res) => {
 
     let token = req.query.token;
     let courseId = req.query.courseid;
+    let category = Number(req.query.category);
+
+    let send = true;
 
     let roles = await getRoles(token,courseId);
     switch (roles) {
@@ -662,24 +687,30 @@ app.post('/addTime', (req, res) => {
                 custom: 1,
                 "chart.options.chart.type": { $ifNull: ["$chart.options.chart.type", ""] },
                 buildTable: { $cond: [{ $ifNull: ["$table", false] }, true, false] },
-                buildFilters: { $cond: [{ $ifNull: ["$filters", false] }, true, false] }
+                /*buildFilters: { $cond: [{ $ifNull: ["$filters", false] }, true, false] }*/
             }
     }];
-    let category = Number(req.query.category)
-    if (Number.isNaN(category)) {
-      throw new Error("Invalid category");
+    
+    if (category != undefined && Number.isNaN(category)) {
+      res.send([]);
+      send = false;
     } else if (category != undefined) {
       aggregation.push({ $match: { category: category }})
     }
-    dbo.collection(config.collNameAnalytics).aggregate(aggregation).toArray(function (err, _res) {
-      if (err) throw err;
-      res.send(_res);
-    });
+    if (send) {
+        dbo.collection(config.collNameAnalytics).aggregate(aggregation).toArray(function (err, _res) {
+            if (err) throw err;
+            res.send(_res);
+        });
+    }
   })
 
-  //example    GET /analytics || /analytics?analyticId=1
+  //example    GET /analytics || /analytics?id=1
   app.get("/analytics", (req, res) => {
-    let id = req.query.analyticId;
+    
+    let tmpChart,fn,last;
+
+    let id = req.query.id;
     if (id == undefined) {
       dbo.collection(config.collNameAnalytics).find({}).toArray(function (err, _res) {
         if (err) throw err;
@@ -688,6 +719,20 @@ app.post('/addTime', (req, res) => {
     } else {
       dbo.collection(config.collNameAnalytics).findOne({ _id: id })
         .then(analytic => {
+          tmpChart = analytic.chart;
+          if (tmpChart != undefined && tmpChart.functions != undefined && tmpChart.functions.length) {
+            //Convert functions parameters and body into functions
+            for (const path of tmpChart.functions) {
+              fn = getPathTarget(tmpChart["options"],path,true);
+              if (fn != null) {
+                last = path.length - 1;
+                fn[path[last]] = Function(
+                  fn[path[last]].arguments,
+                  fn[path[last]].body
+                );
+              }
+            }
+          }
           res.send(analytic)
         })
         .catch(err => {
@@ -697,6 +742,38 @@ app.post('/addTime', (req, res) => {
         })
     }
   })
+
+  app.get("/analyticsData", async (req,res) => {
+    let id = req.query.id;
+    let customData = req.query.customData != undefined ? req.query.customData : false;
+    let params = data = {};
+    let currentParams,toAssign;
+
+    if (serverResearch[id] != undefined) {
+        for (const key of Object.keys(serverResearch[id])) { //Execute all research
+            currentParams = serverResearch[id][key];
+            for (const param of Object.keys(currentParams.assignments)) { //Assign all request's query params
+                for (const path of currentParams.assignments[param]) { //Put a param in all its destinations
+                    toAssign = getPathTarget(currentParams.query,path,true);
+                    if (toAssign != null) {
+                        toAssign[path[path.length - 1]] = req.query[param];
+                    }
+                }
+            }
+            data[key] = await dbo.collection(currentParams.collection).aggregate(currentParams.query).toArray();
+        }
+    } 
+    if (customData) { //Special data research or server-side edits of the found data
+        params = req.query;
+        delete params.id;
+        switch (id) {
+            default:
+                console.log("There aren't no custom data for this analytic");
+                break;
+        }
+    }
+    res.send(data);
+  });
 
   /**
    * Auto convert file using python (XML->JSON)
@@ -811,7 +888,7 @@ app.post('/addTime', (req, res) => {
    function insertAnswerFromPOST(file){
     console.log(file);
     console.log("INSERT ANSWER IN MONGODB");
-    dbo.collection(config.collNameAnswer).find({playerid:file.playerid,questionid:file.questionid,course:file.course}).toArray(function(err, res) {
+    dbo.collection(config.collNameAnswer).find({playerid:file.playerid,"question.idnumber":file.question.idnumber,"question.course":file.question.course}).toArray(function(err, res) {
       if (err) throw err;
       if(res.length>0){
         console.log("ERROR");
@@ -824,15 +901,29 @@ app.post('/addTime', (req, res) => {
       });
   }
 
-// /saveAnswer?playerId=11111&questionid=222222&course=SE&date=DATAA&time=TIME&outcome=OK
-  app.post('/saveAnswer',(req, res) => {
+// /saveAnswer?playerId=11111&questionid=222222&course=SE&time=TIME&outcome=OK
+  app.post('/saveAnswer', async (req, res) => {
 
     console.log("SAVE ANSWER API INVOKED");
 
     let response = {  
         playerid:req.query.playerId,
-        questionid:req.query.questionid,
-        course:req.query.course,
+        question: await dbo.collection(config.collNameQuizes).findOne({
+            idnumber: req.query.questionid,
+            course: req.query.course,
+        },{
+            projection: {
+                _id: 0,
+                idnumber: 1,
+                name: 1,
+                topic: 1,
+                course: 1,
+                type: 1,
+                difficulty: 1,
+                questiontext: 1,
+                answer: 1,
+            }
+        }),
         date:new Date().toISOString(),
         time:req.query.time,
         outcome:req.query.outcome
@@ -840,20 +931,18 @@ app.post('/addTime', (req, res) => {
     insertAnswerFromPOST(response);
 
     res.end(JSON.stringify(response));
-   // res.end("OK");
-
 });
 
 app.get('/answers', (req, res) => {
     let params = {
         playerid: req.query.playerId,
-        questionid: req.query.questionid,
-        course: req.query.course,
+        "question.idnumber": req.query.questionid,
+        "question.course": req.query.course,
         date: req.query.date,
         time: req.query.time,
         outcome: req.query.outcome,
     }
-    let aggregation = [{ $match: {} }];
+    let aggregation = [{ $match: {} },{ $sort: { date: -1 }}];
     for (const key of Object.keys(params)) {
         if (params[key] != undefined) {
             aggregation[0].$match[key] = params[key];
@@ -870,11 +959,6 @@ app.get('/answers', (req, res) => {
 app.post('/insertFromMoodle',(req, res) => {
 
     console.log("insertFromMoodle API INVOKED");
-    let timestamp = new Date();
-    //console.log(req.body);
-    let json_quest = Object.keys(req.body);
-    let j_quest = JSON.parse(json_quest[0]);
-    //console.log(j_quest);
 
     let response = {  
         //idnumber:req.body.idnumber,
@@ -893,28 +977,9 @@ app.post('/insertFromMoodle',(req, res) => {
     };
 
     console.log(response);
-    insertQuestionFromMoodle(response);
     res.end("OK");
 
 });
-  /**
-   * 
-   * @param {*} file JSON con query da inserire in mongodb
-   */
-   function insertQuestionFromMoodle(file){
-    console.log(file);
-    console.log("INSERT QUESTION IN MONGODB");
-    dbo.collection(config.collNameQuizes).find({idnumber:file.idnumber,course:file.course}).toArray(function(err, res) {
-        if (err) throw err;
-        if(res.length>0){
-          console.log("La domanda: "+file.idnumber + " esiste già!"); 
-        }else{
-          dbo.collection(config.collNameQuizes).insertOne(file, function(err, res) {
-            if (err) throw err;
-          });
-        }
-        }); 
-  }
 /******************************************************************** */
   app.listen(port, () => {
     console.log(`PolyGlot App listening on port ${port}!`)
