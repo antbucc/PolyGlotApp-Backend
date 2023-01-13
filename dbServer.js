@@ -959,6 +959,11 @@ app.get('/answers', (req, res) => {
 app.post('/insertFromMoodle',(req, res) => {
 
     console.log("insertFromMoodle API INVOKED");
+    let timestamp = new Date();
+    //console.log(req.body);
+    let json_quest = Object.keys(req.body);
+    let j_quest = JSON.parse(json_quest[0]);
+    //console.log(j_quest);
 
     let response = {  
         //idnumber:req.body.idnumber,
@@ -977,9 +982,29 @@ app.post('/insertFromMoodle',(req, res) => {
     };
 
     console.log(response);
+    insertQuestionFromMoodle(response);
     res.end("OK");
 
 });
+
+/**
+   * 
+   * @param {*} file JSON con query da inserire in mongodb
+   */
+function insertQuestionFromMoodle(file){
+    console.log(file);
+    console.log("INSERT QUESTION IN MONGODB");
+    dbo.collection(config.collNameQuizes).find({idnumber:file.idnumber,course:file.course}).toArray(function(err, res) {
+        if (err) throw err;
+        if(res.length>0){
+          console.log("La domanda: "+file.idnumber + " esiste già!"); 
+        }else{
+          dbo.collection(config.collNameQuizes).insertOne(file, function(err, res) {
+            if (err) throw err;
+          });
+        }
+        }); 
+  }
 /******************************************************************** */
   app.listen(port, () => {
     console.log(`PolyGlot App listening on port ${port}!`)
