@@ -960,40 +960,68 @@ app.post('/insertFromMoodle',(req, res) => {
 
     console.log("insertFromMoodle API INVOKED");
     let timestamp = new Date();
-    //console.log(req.body);
     let json_quest = Object.keys(req.body);
     let j_quest = JSON.parse(json_quest[0]);
-    //console.log(j_quest);
 
-    let response = {  
-        //idnumber:req.body.idnumber,
-        idnumber:j_quest.id,
-        type:j_quest.type,
-        name:j_quest.name,
-        questiontext:j_quest.questiontext,
-        generalfeedback:j_quest.generalfeedback,
-        correctfeedback:j_quest.correctfeedback,
-        partiallycorrectfeedback:j_quest.partiallycorrectfeedback,
-        incorrectfeedback:j_quest.incorrectfeedback,
-        difficulty:j_quest.difficulty,
-        topic:j_quest.topic,
-        course:j_quest.corso,
-        timestamp:timestamp
-    };
-
-    console.log(response);
-    insertQuestionFromMoodle(response);
+    console.log("j_quest.OLDQuestion --> "+j_quest.OLDQuestion);
+    if(j_quest.OLDQuestion!=0){
+        insertUpdateFromMoodle(j_quest.corso,j_quest.OLDQuestion,json_quest.timestamp);//Corso-SE
+    }else{
+        let response = {  
+            //idnumber:req.body.idnumber,
+            idnumber:j_quest.id,
+            type:j_quest.type,
+            name:j_quest.name,
+            questiontext:j_quest.questiontext,
+            generalfeedback:j_quest.generalfeedback,
+            correctfeedback:j_quest.correctfeedback,
+            partiallycorrectfeedback:j_quest.partiallycorrectfeedback,
+            incorrectfeedback:j_quest.incorrectfeedback,
+            difficulty:j_quest.difficulty,
+            topic:j_quest.topic,
+            course:j_quest.corso,
+            timestamp:timestamp
+        };
+    
+        //console.log(response);
+        insertQuestionFromMoodle(response);
+    }
     res.end("OK");
 
 });
+
+/**
+ * 
+ * @param {*} n numero della domanda scelta data da una lista /questions
+ * @param {*} datetime data e ora dell'invio della domanda
+ */
+function insertUpdateFromMoodle(c,n,datetime){
+    let qz;
+    let aggregation = qz == undefined ? [{ $match: { course:c } }] : [];
+
+    dbo.collection(config.collNameQuizes).aggregate(aggregation).toArray(function(err, _res) {
+        if (err) throw err;
+        _res.sort();
+        let quest= _res[n-1];
+        //console.log(_res);
+        console.log("----------------------------------------------------------------------------------------------------------");
+        console.log(_res[n]);
+        quest.idnumber="";
+        quest.datetime=datetime;
+        console.log("AGGIORNO UNA DOMANDA");
+        insertQuestionFromMoodle(quest);
+    });
+}
+
 
 /**
    * 
    * @param {*} file JSON con query da inserire in mongodb
    */
 function insertQuestionFromMoodle(file){
-    console.log(file);
+    //console.log(file);
     console.log("INSERT QUESTION IN MONGODB");
+    console.log("idnumber   "+file.idnumber + "  type string? " +(typeof file.idnumber=="string"));
     dbo.collection(config.collNameQuizes).find({idnumber:file.idnumber,course:file.course}).toArray(function(err, res) {
         if (err) throw err;
         if(res.length>0){
